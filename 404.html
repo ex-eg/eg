@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>404 — الصفحة غير موجودة | elgoharyX</title>
+<meta name="robots" content="noindex" />
+<link rel="icon" type="image/png" href="https://i.ibb.co/1t1TCvH7/103777.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root{--bg:#0c1424;--bg-2:#0f1a2e;--panel:#111d33;--stroke:rgba(210,222,245,.12);
+    --txt:#eef2fb;--muted:#9fabc6;--muted-2:#7f8bab;--gold:#c9a548;--gold-2:#e6c980;--accent:#2f5db0;--accent-2:#3f74c9}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:"IBM Plex Sans Arabic",system-ui,sans-serif;background:var(--bg);color:var(--txt);
+    min-height:100vh;display:flex;flex-direction:column;-webkit-font-smoothing:antialiased;overflow-x:hidden;
+    background-image:radial-gradient(1100px 700px at 85% -10%,rgba(47,93,176,.16),transparent 60%),
+      radial-gradient(900px 600px at 0% 108%,rgba(201,165,72,.10),transparent 55%)}
+  .wrap{flex:1;display:grid;place-items:center;padding:40px 18px}
+  .card{width:min(560px,100%);text-align:center;background:linear-gradient(180deg,var(--panel),var(--bg-2));
+    border:1px solid var(--stroke);border-radius:16px;padding:clamp(30px,6vw,54px) clamp(22px,5vw,44px);position:relative;overflow:hidden}
+  .card::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;
+    background:linear-gradient(90deg,transparent,var(--gold),var(--gold-2),var(--gold),transparent)}
+  .logo{width:52px;height:52px;object-fit:contain;border-radius:12px;margin:0 auto 20px;display:block;
+    background:#0b1424;padding:6px;border:1px solid var(--stroke)}
+  .code{font-family:"Cormorant Garamond",serif;font-weight:700;font-size:clamp(84px,20vw,140px);line-height:.9;
+    background:linear-gradient(180deg,var(--gold-2),var(--gold) 60%,#a8842f);-webkit-background-clip:text;
+    background-clip:text;color:transparent;letter-spacing:2px}
+  .glitch{display:inline-flex;align-items:center;gap:8px;font-size:12.5px;letter-spacing:1.5px;color:var(--gold-2);
+    border:1px solid rgba(201,165,72,.32);background:rgba(201,165,72,.06);padding:5px 14px;border-radius:100px;margin:6px 0 18px}
+  .glitch::before{content:"";width:7px;height:7px;border-radius:50%;background:#ff6b6b;box-shadow:0 0 10px #ff6b6b}
+  h1{font-family:"Cormorant Garamond",serif;font-size:clamp(24px,5vw,34px);font-weight:700;margin-bottom:10px}
+  p{color:var(--muted);font-size:15px;line-height:1.9;max-width:44ch;margin:0 auto 26px}
+  .actions{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
+  .btn{border:1px solid transparent;cursor:pointer;font-family:inherit;font-weight:600;font-size:15px;
+    padding:13px 26px;border-radius:11px;text-decoration:none;transition:.2s;display:inline-flex;align-items:center;gap:9px}
+  .btn.primary{background:linear-gradient(120deg,var(--accent),var(--accent-2));color:#fff}
+  .btn.primary:hover{transform:translateY(-2px);box-shadow:0 14px 34px -14px var(--accent)}
+  .btn.ghost{background:transparent;border:1px solid var(--stroke);color:var(--muted)}
+  .btn.ghost:hover{border-color:var(--gold);color:var(--txt);transform:translateY(-2px)}
+  .btn svg{width:18px;height:18px}
+  .foot{display:flex;align-items:center;justify-content:center;gap:10px;padding:22px 16px 28px;
+    color:var(--muted-2);font-size:12.5px;border-top:1px solid rgba(210,222,245,.07)}
+  .foot img{width:20px;height:20px;object-fit:contain;opacity:.9}
+  .foot b{color:var(--gold-2);font-weight:600}
+</style>
+</head>
+<body>
+  <main class="wrap">
+    <div class="card">
+      <img class="logo" src="https://i.ibb.co/1t1TCvH7/103777.png" alt="elgoharyX" />
+      <div class="code">404</div>
+      <span class="glitch">رابط غير صالح · BROKEN LINK</span>
+      <h1>الصفحة غير موجودة</h1>
+      <p>يبدو أن الرابط غير صحيح، أو تم تعديله، أو أن الصفحة لم تعد متاحة. تحقّق من الرابط أو عُد إلى الصفحة الرئيسية.</p>
+      <div class="actions">
+        <a class="btn primary" id="home" href="/">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/><path d="M9 21v-6h6v6"/></svg>
+          العودة للرئيسية
+        </a>
+        <button class="btn ghost" onclick="history.back()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M15 18l-6-6 6-6"/></svg>
+          الرجوع للخلف
+        </button>
+      </div>
+    </div>
+  </main>
+  <footer class="foot">
+    <img src="https://i.ibb.co/1t1TCvH7/103777.png" alt="elgoharyX logo" />
+    <span>© 2026 <b>elgoharyX</b> — جميع الحقوق محفوظة</span>
+  </footer>
+<script>
+  /* point "home" to the site root (handles GitHub Pages project sub-paths) */
+  (function(){
+    try{
+      var host=location.hostname, segs=location.pathname.split('/').filter(Boolean), base='/';
+      // GitHub Pages project site: https://user.github.io/<repo>/...  → base "/<repo>/"
+      if(host.endsWith('github.io') && segs.length>1){ base='/'+segs[0]+'/'; }
+      document.getElementById('home').setAttribute('href', location.origin + base);
+    }catch(e){}
+  })();
+</script>
+</body>
+</html>
