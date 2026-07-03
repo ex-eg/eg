@@ -15,6 +15,7 @@
 <link rel="canonical" href="https://elgoharyx.web.app/" />
 <link rel="icon" type="image/png" href="https://i.ibb.co/1t1TCvH7/103777.png" />
 <link rel="apple-touch-icon" href="https://i.ibb.co/1t1TCvH7/103777.png" />
+<link rel="manifest" href="manifest.webmanifest" />
 <!-- Open Graph -->
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="elgoharyX" />
@@ -1159,6 +1160,69 @@
     border-top:1px solid var(--stroke-soft);color:var(--muted-2);font-size:11.5px;line-height:1.5}
   .drawer-foot img{width:20px;height:20px;object-fit:contain;opacity:.9;flex:none}
   .drawer-foot b{color:var(--gold-2)}
+
+  /* ---------- drawer brand (logo) + section dividers ---------- */
+  .drawer-brand{display:flex;align-items:center;gap:11px;padding:20px 18px 16px;border-bottom:1px solid var(--stroke-soft)}
+  .drawer-brand .db-mark{width:40px;height:40px;border-radius:10px;display:grid;place-items:center;flex:none;
+    background:linear-gradient(135deg,var(--accent),#1c3f82);border:1px solid var(--stroke);overflow:hidden}
+  .drawer-brand .db-mark img{width:26px;height:26px;object-fit:contain}
+  .drawer-brand .db-t{flex:1;min-width:0;display:flex;flex-direction:column;line-height:1.25}
+  .drawer-brand .db-t b{font-family:"Cormorant Garamond",serif;font-size:18px;color:var(--txt);letter-spacing:.3px}
+  .drawer-brand .db-t span{font-size:11.5px;color:var(--muted-2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .dr-sep{height:1px;background:var(--stroke-soft);margin:9px 12px}
+  .dr-label{font-size:11px;color:var(--muted-2);font-weight:600;letter-spacing:.4px;padding:2px 14px 6px}
+
+  /* ---------- info sheet (privacy / how-to / support) ---------- */
+  .info-modal{width:min(560px,100%);max-height:min(84vh,680px);display:flex;flex-direction:column}
+  .info-h{display:flex;align-items:center;gap:11px;margin-bottom:16px;padding-left:34px}
+  .info-h svg{width:27px;height:27px;color:var(--gold-2);flex:none}
+  .info-h h3{font-family:"Cormorant Garamond",serif;font-size:24px;text-align:right;margin:0}
+  .info-body{overflow-y:auto;-webkit-overflow-scrolling:touch;color:var(--muted);font-size:14px;line-height:1.9;
+    padding-left:6px;margin-bottom:18px}
+  .info-body::-webkit-scrollbar{width:8px}
+  .info-body::-webkit-scrollbar-thumb{background:var(--stroke);border-radius:8px}
+  .info-body h4{color:var(--txt);font-size:15px;margin:18px 0 7px;font-weight:600}
+  .info-body>p:first-child{color:var(--muted);margin-bottom:6px}
+  .info-body p{margin-bottom:9px;text-align:right}
+  .info-body ul{margin:0 20px 6px 0;padding:0;list-style:none}
+  .info-body ul li{position:relative;margin-bottom:8px;padding-right:16px}
+  .info-body ul li::before{content:"";position:absolute;right:0;top:9px;width:6px;height:6px;border-radius:50%;
+    background:var(--gold)}
+  .info-body b{color:var(--txt)}
+  .info-body .step{display:flex;gap:12px;margin-bottom:13px;text-align:right}
+  .info-body .step .n{flex:none;width:27px;height:27px;border-radius:50%;display:grid;place-items:center;
+    font-size:13px;font-weight:700;color:#1a1300;background:linear-gradient(120deg,var(--gold),var(--gold-2))}
+  .info-body .step .stx{flex:1;font-size:13.5px;color:var(--muted)}
+  .info-body .step .stx b{display:block;color:var(--txt);margin-bottom:2px;font-size:14px}
+  .info-body .info-tip{margin-top:14px;padding:12px 14px;border-radius:11px;font-size:13px;color:var(--txt);
+    background:color-mix(in srgb,var(--gold) 12%,transparent);border:1px solid var(--stroke)}
+  .sup-links{display:flex;flex-direction:column;gap:9px;margin-top:4px}
+  .sup-link{display:flex;align-items:center;gap:12px;padding:13px 14px;border-radius:12px;text-decoration:none;
+    border:1px solid var(--stroke);background:rgba(255,255,255,.02);color:var(--txt);transition:.18s}
+  .sup-link:hover{border-color:var(--gold);background:rgba(255,255,255,.05)}
+  .sup-link svg{width:22px;height:22px;color:var(--gold-2);flex:none}
+  .sup-link span{display:flex;flex-direction:column;font-size:12px;color:var(--muted)}
+  .sup-link span b{color:var(--txt);font-size:14px;font-family:"Space Grotesk",sans-serif;direction:ltr}
+
+  /* ---------- PWA install banner ---------- */
+  .pwa-banner{position:fixed;left:12px;right:12px;top:calc(10px + env(safe-area-inset-top,0px));z-index:80;
+    display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:14px;
+    background:linear-gradient(180deg,var(--panel),var(--bg-2));border:1px solid var(--stroke);
+    box-shadow:0 24px 60px -22px rgba(0,0,0,.75);transform:translateY(-140%);opacity:0;
+    transition:transform .34s cubic-bezier(.2,.8,.2,1),opacity .34s;max-width:520px;margin-inline:auto}
+  .pwa-banner.show{transform:translateY(0);opacity:1}
+  .pwa-banner .pwa-logo{width:40px;height:40px;border-radius:10px;object-fit:contain;flex:none;
+    background:linear-gradient(135deg,var(--accent),#1c3f82);padding:5px;border:1px solid var(--stroke)}
+  .pwa-banner .pwa-txt{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
+  .pwa-banner .pwa-txt b{font-size:14px;color:var(--txt)}
+  .pwa-banner .pwa-txt span{font-size:12px;color:var(--muted);line-height:1.5}
+  .pwa-banner .pwa-ico{display:inline-grid;place-items:center;width:18px;height:18px;border-radius:5px;
+    background:var(--stroke);color:var(--gold-2);font-weight:700;vertical-align:middle}
+  .pwa-banner .pwa-install{flex:none;border:none;cursor:pointer;font-family:inherit;font-weight:700;font-size:13px;
+    padding:10px 16px;border-radius:10px;color:#1a1300;background:linear-gradient(120deg,var(--gold),var(--gold-2))}
+  .pwa-banner .pwa-install:active{transform:scale(.96)}
+  .pwa-banner .pwa-x{flex:none;background:none;border:none;color:var(--muted);cursor:pointer;font-size:22px;
+    line-height:1;padding:0 4px}
 </style>
 </head>
 <body>
@@ -1211,6 +1275,9 @@
     burger:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>',
     x:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg>',
     mode:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8Z"/></svg>',
+    howto:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9.6 9.2a2.4 2.4 0 1 1 3.4 2.2c-.8.4-1.1.9-1.1 1.8"/><path d="M12 16.4h.01"/></svg>',
+    privacy:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 4.5-3 8.1-7 10-4-1.9-7-5.5-7-10V6l7-3Z"/><path d="M9.3 12l1.9 1.9L15 10.2"/></svg>',
+    support:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3.4"/><path d="M5.2 5.2 8.4 8.4M15.6 15.6l3.2 3.2M18.8 5.2 15.6 8.4M8.4 15.6 5.2 18.8"/></svg>',
   };
   try{ if(localStorage.getItem('apb_mode')==='light') document.documentElement.setAttribute('data-mode','light'); }catch{}
   const $ = (s,r=document)=>r.querySelector(s);
@@ -1810,21 +1877,97 @@
     return `<div id="drawerWrap" class="drawer-wrap">
       <div class="drawer-bg" data-act="menu-close"></div>
       <aside class="drawer">
+        <div class="drawer-brand">
+          <span class="db-mark"><img src="${LOGO}" alt="elgoharyX"/></span>
+          <div class="db-t"><b>Academic Profiles</b><span>منشئ البروفايلات · elgoharyX</span></div>
+          <button class="dr-x" data-act="menu-close" aria-label="إغلاق">${TAB.x}</button>
+        </div>
         <div class="drawer-head">
           <span class="avatar-sm dr-av">${esc(initials(currentUser.username))}</span>
           <div class="dr-id"><div class="dr-name">${esc(currentUser.username)}</div><div class="dr-sub">${esc(currentUser.email||'حساب elgoharyX')}</div></div>
-          <button class="dr-x" data-act="menu-close" aria-label="إغلاق">${TAB.x}</button>
         </div>
         <nav class="drawer-nav">
           <button class="dr-item ${active==='mine'?'on':''}" data-nav="mine">${TAB.cards}<span>بروفايلاتي</span></button>
           <button class="dr-item ${active==='build'?'on':''}" data-nav="new">${TAB.plus}<span>بروفايل جديد</span></button>
           <button class="dr-item" data-act="mode">${TAB.mode}<span>تبديل الوضع (ليلي / نهاري)</span></button>
+          <div class="dr-sep"></div>
+          <div class="dr-label">المساعدة والمعلومات</div>
+          <button class="dr-item" data-info="howto">${TAB.howto}<span>كيفية إنشاء بروفايل</span></button>
+          <button class="dr-item" data-info="privacy">${TAB.privacy}<span>سياسة الخصوصية</span></button>
+          <button class="dr-item" data-info="support">${TAB.support}<span>الدعم والمساعدة</span></button>
+          <div class="dr-sep"></div>
           <button class="dr-item danger" data-act="logout">${TAB.logout}<span>تسجيل الخروج</span></button>
         </nav>
         <div class="drawer-foot"><img src="${LOGO}" alt="elgoharyX"/><span>© 2026 <b>elgoharyX</b> — جميع الحقوق محفوظة</span></div>
       </aside>
     </div>`;
   }
+  /* ---------- info pages (privacy / how-to / support) shown as a sheet ---------- */
+  /*  ⚙️  عدّل بيانات التواصل بالأسفل بمعلوماتك الحقيقية  */
+  const SUPPORT = { email:'elgoharyx.help@gmail.com', whatsapp:'https://wa.me/00000000000' };
+  const INFO = {
+    howto:{
+      icon:TAB.howto, title:'كيفية إنشاء بروفايل',
+      html:`<p>أنشئ بروفايلك الأكاديمي الاحترافي وشاركه برابط دائم في خطوات بسيطة:</p>
+        <div class="step"><span class="n">1</span><div class="stx"><b>سجّل الدخول</b>أنشئ حساباً جديداً أو ادخل بحسابك الحالي.</div></div>
+        <div class="step"><span class="n">2</span><div class="stx"><b>ابدأ بروفايلاً جديداً</b>اضغط «بروفايل جديد» من القائمة الجانبية أو الشريط العلوي.</div></div>
+        <div class="step"><span class="n">3</span><div class="stx"><b>البيانات الأساسية</b>عبّئ الاسم، المسمّى العلمي، المنصب، النبذة، الجامعة والكلية والتخصص.</div></div>
+        <div class="step"><span class="n">4</span><div class="stx"><b>التصميم</b>اختر التخطيط المناسب واللون من بين أكثر من 100 تخطيط و48 لوناً، وفعّل مؤثرات 3D وحركة الظهور إن رغبت.</div></div>
+        <div class="step"><span class="n">5</span><div class="stx"><b>الصورة الشخصية</b>ارفع صورتك أو ألصق رابطها، ثم اضبط موضعها وتكبيرها داخل الإطار.</div></div>
+        <div class="step"><span class="n">6</span><div class="stx"><b>وسائل التواصل</b>أضف بريدك ورقم هاتفك وأي وسائل تواصل أخرى.</div></div>
+        <div class="step"><span class="n">7</span><div class="stx"><b>أنشئ الرابط</b>اضغط «إنشاء الرابط وحفظه» ليُحفظ بروفايلك ويُنشأ رابط دائم ومختصر تلقائياً.</div></div>
+        <div class="step"><span class="n">8</span><div class="stx"><b>شارك بروفايلك</b>انسخ الرابط وشاركه، أو انسخ «رابط المشاركة للتعديل» لمن تريد أن يعدّل معك.</div></div>
+        <p class="info-tip">💡 على الهاتف: استخدم الشريط السفلي للتنقّل بين الأقسام، وتبويب «المعاينة» لرؤية النتيجة مباشرةً.</p>`
+    },
+    privacy:{
+      icon:TAB.privacy, title:'سياسة الخصوصية',
+      html:`<p>نحرص على خصوصيتك. توضّح هذه السياسة البيانات التي نتعامل معها وكيفية استخدامها.</p>
+        <h4>البيانات التي نجمعها</h4>
+        <ul><li>اسم المستخدم والبريد الإلكتروني عند إنشاء الحساب.</li>
+        <li>محتوى البروفايل الذي تُدخله بنفسك (الاسم، المنصب، النبذة، وسائل التواصل…).</li></ul>
+        <h4>أين تُحفظ بياناتك</h4>
+        <ul><li>تُخزَّن الحسابات والبروفايلات في قاعدة بيانات <b>Firebase</b> الآمنة من Google.</li>
+        <li>الصور تُرفع عبر خدمة <b>imgbb</b> وتُحفظ كرابط عام.</li>
+        <li>يُحفظ تفضيل الوضع (ليلي/نهاري) وجلسة الدخول على جهازك فقط.</li></ul>
+        <h4>مشاركة الروابط</h4>
+        <ul><li>رابط البروفايل عام؛ أي شخص يملكه يمكنه مشاهدته.</li>
+        <li>«رابط التعديل» يتيح لحامله تعديل البروفايل — فشاركه بحذر.</li></ul>
+        <h4>ماذا لا نفعل</h4>
+        <ul><li>لا نبيع بياناتك ولا نشاركها مع أطراف ثالثة لأغراض تسويقية.</li></ul>
+        <h4>حقوقك</h4>
+        <ul><li>يمكنك تعديل أو حذف أي بروفايل في أي وقت من صفحة «بروفايلاتي».</li></ul>`
+    },
+    support:{
+      icon:TAB.support, title:'الدعم والمساعدة',
+      html:`<p>واجهت مشكلة أو لديك اقتراح؟ إليك حلول أكثر المشكلات شيوعاً وطرق التواصل معنا.</p>
+        <h4>مشكلات شائعة</h4>
+        <ul><li><b>لا يُحفظ البروفايل:</b> تأكد من تسجيل الدخول ومن اتصالك بالإنترنت.</li>
+        <li><b>لم يُختصر الرابط:</b> يعمل الاختصار تلقائياً بعد رفع الموقع على استضافة تدعم https.</li>
+        <li><b>الصورة لا تظهر:</b> تأكد أن الرابط يشير مباشرةً إلى صورة، أو أعد رفعها من زر «رفع صورة».</li></ul>
+        <h4>تواصل معنا</h4>
+        <div class="sup-links">
+          <a class="sup-link" href="mailto:${SUPPORT.email}">${TAB.support}<span>البريد الإلكتروني<b>${esc(SUPPORT.email)}</b></span></a>
+          <a class="sup-link" href="${SUPPORT.whatsapp}" target="_blank" rel="noopener">${TAB.support}<span>واتساب<b>تواصل مباشر</b></span></a>
+        </div>`
+    }
+  };
+  function openInfo(key){
+    const it=INFO[key]; if(!it) return;
+    closeInfo();
+    const ov=document.createElement('div');
+    ov.className='overlay show'; ov.id='infoOv';
+    ov.innerHTML=`<div class="modal info-modal">
+      <button class="close" data-info-close aria-label="إغلاق">✕</button>
+      <div class="info-h">${it.icon}<h3>${it.title}</h3></div>
+      <div class="info-body">${it.html}</div>
+      <button class="btn primary" data-info-close style="margin-top:4px">تم</button>
+    </div>`;
+    document.body.appendChild(ov);
+    ov.addEventListener('click',e=>{ if(e.target===ov||e.target.closest('[data-info-close]')) closeInfo(); });
+  }
+  function closeInfo(){ const o=$('#infoOv'); if(o) o.remove(); }
+  document.addEventListener('keydown',e=>{ if(e.key==='Escape') closeInfo(); });
+
   function toggleMode(){
     const isLight=document.documentElement.getAttribute('data-mode')==='light';
     if(isLight){ document.documentElement.removeAttribute('data-mode'); try{localStorage.setItem('apb_mode','dark');}catch{} }
@@ -1843,6 +1986,8 @@
     const dw=$('#drawerWrap');
     document.querySelectorAll('[data-act="menu"]').forEach(b=>b.onclick=()=>{ if(dw) dw.classList.add('open'); });
     document.querySelectorAll('[data-act="menu-close"]').forEach(b=>b.onclick=()=>{ if(dw) dw.classList.remove('open'); });
+    // info pages (privacy / how-to / support) — open the sheet then close the drawer
+    document.querySelectorAll('[data-info]').forEach(b=>b.onclick=()=>{ openInfo(b.dataset.info); if(dw) dw.classList.remove('open'); });
     // close the drawer after choosing a navigation item
     document.querySelectorAll('.drawer [data-nav]').forEach(b=>b.addEventListener('click',()=>{ if(dw) dw.classList.remove('open'); }));
   }
@@ -2346,15 +2491,21 @@
         if(isMobile()) window.scrollTo({top:0,behavior:'smooth'});
       };
       nav.querySelectorAll('.bnav').forEach(b=>b.onclick=()=>setPane(b.dataset.pane));
-      // horizontal swipe between sections
+      // horizontal swipe between sections — but never hijack gestures that begin
+      // on a control that needs its own horizontal drag / scroll / tap
       let sx=0,sy=0,tracking=false;
       const root=$('.builder');
-      root.addEventListener('touchstart',e=>{ if(!isMobile()||e.touches.length>1){tracking=false;return;}
-        sx=e.touches[0].clientX; sy=e.touches[0].clientY; tracking=true; },{passive:true});
+      const NO_SWIPE='input,textarea,select,button,a,label,[type=range],.layouts,.templates,.lay,.tpl,.align-sliders,.link-list,.mini-select,.swatch';
+      root.addEventListener('touchstart',e=>{
+        tracking=false;
+        if(!isMobile()||e.touches.length>1) return;
+        if(e.target.closest(NO_SWIPE)) return;
+        sx=e.touches[0].clientX; sy=e.touches[0].clientY; tracking=true;
+      },{passive:true});
       root.addEventListener('touchend',e=>{
         if(!tracking) return; tracking=false;
         const t=e.changedTouches[0], dx=t.clientX-sx, dy=t.clientY-sy;
-        if(Math.abs(dx)<60||Math.abs(dx)<Math.abs(dy)*1.6) return; // ignore vertical scrolls
+        if(Math.abs(dx)<70||Math.abs(dx)<Math.abs(dy)*1.8) return; // must be a deliberate horizontal swipe
         const i=order.indexOf(current);
         // RTL: swipe right → previous (earlier) section, swipe left → next
         const ni = dx>0 ? i-1 : i+1;
@@ -2408,5 +2559,6 @@
     route();
   })();
 </script>
+<script src="js/pwa.js" defer></script>
 </body>
 </html>

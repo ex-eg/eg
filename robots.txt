@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://ex-eg.github.io/eg/sitemap.xml
+Sitemap: https://elgoharyx.web.app/sitemap.xml
