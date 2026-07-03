@@ -2,9 +2,7 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8" />
-  <meta name="google-site-verification" content="FcsBnbfhfMXASsfH2kpnklXFFX3PKob0KV8l-wMRacA" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <meta name="google-site-verification" content="FcsBnbfhfMXASsfH2kpnklXFFX3PKob0KV8l-wMRacA" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 <meta name="mobile-web-app-capable" content="yes" />
@@ -14,7 +12,7 @@
 <meta name="author" content="elgoharyX" />
 <meta name="robots" content="index, follow, max-image-preview:large" />
 <meta name="theme-color" content="#0c1424" />
-<link rel="canonical" href="https://ex-eg.github.io/eg" />
+<link rel="canonical" href="https://elgoharyx.web.app/" />
 <link rel="icon" type="image/png" href="https://i.ibb.co/1t1TCvH7/103777.png" />
 <link rel="apple-touch-icon" href="https://i.ibb.co/1t1TCvH7/103777.png" />
 <!-- Open Graph -->
@@ -1073,6 +1071,10 @@
     .modal .close{top:16px;left:16px}
   }
   @keyframes sheetUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
+  @keyframes paneIn{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:none}}
+
+  /* builder bottom nav is mobile-only; hidden on wider screens */
+  .build-nav{display:none}
 
   /* ---------- mobile-first builder (preview pinned on top, app-like) ---------- */
   @media(max-width:600px){
@@ -1084,16 +1086,32 @@
     .panel h2{font-size:20px}
     .panel>.sub{font-size:12.5px;margin-bottom:16px}
 
-    /* builder becomes a single column with the LIVE PREVIEW pinned at the top */
-    .builder{gap:0}
-    .preview-col{order:-1;position:sticky;top:calc(52px + env(safe-area-inset-top,0px));z-index:25;
-      margin:0 -14px 14px;background:var(--bg)}
-    .preview-col .preview-head{padding:8px 16px 6px;margin:0}
-    .preview-col .preview-head .t{font-size:15px}
-    .preview-col>.panel{border-radius:0;border-left:0;border-right:0;max-height:40vh;overflow:auto;
-      -webkit-overflow-scrolling:touch;padding:12px 14px!important;box-shadow:0 10px 20px -12px rgba(0,0,0,.5)}
-    .preview-col>.panel::before{display:none}
+    /* builder becomes an app-like flow: a bottom bar switches between separate
+       sections (data / design / photo / contact) and the live preview */
+    .builder{gap:0;display:block}
+    .bpane{display:none;animation:paneIn .22s ease}
+    .bpane.pane-on{display:block}
+    .panel.pane-hide{display:none}
+    .preview-col{display:none;margin:0}
+    .preview-col.pane-show{display:block;animation:paneIn .22s ease}
+    .preview-col .preview-head{padding:2px 2px 12px;margin:0}
+    .preview-col .preview-head .t{font-size:16px}
+    .preview-col>.panel{border-radius:14px}
     .stage{padding:0}
+    .wrap{padding-bottom:calc(86px + env(safe-area-inset-bottom,0px))}
+
+    /* bottom section navigation (local to the builder) */
+    .build-nav{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:46;justify-content:space-around;
+      gap:2px;background:rgba(12,20,36,.94);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
+      border-top:1px solid var(--stroke);padding:7px 6px calc(7px + env(safe-area-inset-bottom,0px))}
+    html[data-mode="light"] .build-nav{background:rgba(255,255,255,.95)}
+    .bnav{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;background:none;border:none;
+      cursor:pointer;color:var(--muted-2);font-family:inherit;font-size:10.5px;font-weight:600;padding:7px 3px;
+      border-radius:12px;transition:color .15s,transform .12s}
+    .bnav svg{width:22px;height:22px}
+    .bnav.on{color:var(--gold-2)}
+    .bnav.on svg{filter:drop-shadow(0 0 8px rgba(230,201,128,.4))}
+    .bnav:active{transform:scale(.92)}
 
     /* comfy touch targets */
     .acc>summary{padding:16px}
@@ -2007,6 +2025,7 @@
           ? (sharedEdit?'أنت تعدّل بروفايلاً تمت مشاركته معك.':'عدّل البيانات ثم احفظ التغييرات.')
           : 'اختر تصميماً، عبّئ البيانات، ثم أنشئ رابطاً دائماً يُحفظ في Firebase.'}</div>
 
+        <div class="bpane pane-on" data-pane="data">
         <details class="acc" open>
           <summary><span class="sum-t">${UICON.person} البيانات الأساسية</span></summary>
           <div class="acc-body">
@@ -2020,7 +2039,9 @@
             <div class="grid2">${fld('specialization','التخصص',state.specialization)}${fld('interests','الاهتمامات البحثية',state.interests)}</div>
           </div>
         </details>
+        </div>
 
+        <div class="bpane" data-pane="design">
         <details class="acc">
           <summary><span class="sum-t">${UICON.grid} التخطيط / الشكل <span style="color:var(--muted-2);font-weight:400">(${LAYOUTS.length})</span></span></summary>
           <div class="acc-body">
@@ -2073,6 +2094,9 @@
           </div>
         </details>
 
+        </div>
+
+        <div class="bpane" data-pane="photo">
         <details class="acc">
           <summary><span class="sum-t">${UICON.photo} الصورة الشخصية</span></summary>
           <div class="acc-body">
@@ -2099,6 +2123,9 @@
           </div>
         </details>
 
+        </div>
+
+        <div class="bpane" data-pane="contact">
         <details class="acc">
           <summary><span class="sum-t">${UICON.chat} وسائل التواصل</span></summary>
           <div class="acc-body">
@@ -2114,6 +2141,7 @@
             </div>
           </div>
         </details>
+        </div>
 
         <button class="btn primary" id="gen">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M10 13a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1"/><path d="M14 11a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1"/></svg>
@@ -2121,10 +2149,18 @@
         </button>
       </section>
 
-      <section class="preview-col">
+      <section class="preview-col" data-pane="preview">
         <div class="preview-head"><span class="t">معاينة حيّة</span><span class="live">مباشر</span></div>
         <div class="panel" style="padding:clamp(14px,2vw,22px)"><div class="stage" id="preview"></div></div>
       </section>
+
+      <nav class="build-nav">
+        <button class="bnav on" data-pane="data">${UICON.person}<span>البيانات</span></button>
+        <button class="bnav" data-pane="design">${UICON.grid}<span>التصميم</span></button>
+        <button class="bnav" data-pane="photo">${UICON.photo}<span>الصورة</span></button>
+        <button class="bnav" data-pane="contact">${UICON.chat}<span>التواصل</span></button>
+        <button class="bnav" data-pane="preview"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg><span>المعاينة</span></button>
+      </nav>
     </div></div>
 
     <div class="overlay" id="ov">
@@ -2284,6 +2320,48 @@
     $('#ovClose').onclick=()=>$('#ov').classList.remove('show');
     $('#toMine').onclick=()=>{$('#ov').classList.remove('show'); showMyProfiles();};
     $('#ov').onclick=e=>{if(e.target===$('#ov'))$('#ov').classList.remove('show');};
+
+    // ---- app-like section navigation (mobile bottom bar + swipe) ----
+    (function(){
+      const nav=$('.build-nav'); if(!nav) return;
+      const panel=$('.builder>.panel');
+      const prev=$('.builder .preview-col');
+      const panes=[...document.querySelectorAll('.builder .bpane')];
+      const order=['data','design','photo','contact','preview'];
+      let current='data';
+      const isMobile=()=>window.matchMedia('(max-width:600px)').matches;
+      const setPane=(name)=>{
+        if(!order.includes(name)) return;
+        current=name;
+        nav.querySelectorAll('.bnav').forEach(b=>b.classList.toggle('on',b.dataset.pane===name));
+        if(name==='preview'){
+          if(panel) panel.classList.add('pane-hide');
+          if(prev) prev.classList.add('pane-show');
+          paint(); playPreviewAnim();
+        }else{
+          if(panel) panel.classList.remove('pane-hide');
+          if(prev) prev.classList.remove('pane-show');
+          panes.forEach(p=>p.classList.toggle('pane-on',p.dataset.pane===name));
+        }
+        if(isMobile()) window.scrollTo({top:0,behavior:'smooth'});
+      };
+      nav.querySelectorAll('.bnav').forEach(b=>b.onclick=()=>setPane(b.dataset.pane));
+      // horizontal swipe between sections
+      let sx=0,sy=0,tracking=false;
+      const root=$('.builder');
+      root.addEventListener('touchstart',e=>{ if(!isMobile()||e.touches.length>1){tracking=false;return;}
+        sx=e.touches[0].clientX; sy=e.touches[0].clientY; tracking=true; },{passive:true});
+      root.addEventListener('touchend',e=>{
+        if(!tracking) return; tracking=false;
+        const t=e.changedTouches[0], dx=t.clientX-sx, dy=t.clientY-sy;
+        if(Math.abs(dx)<60||Math.abs(dx)<Math.abs(dy)*1.6) return; // ignore vertical scrolls
+        const i=order.indexOf(current);
+        // RTL: swipe right → previous (earlier) section, swipe left → next
+        const ni = dx>0 ? i-1 : i+1;
+        if(ni>=0&&ni<order.length) setPane(order[ni]);
+      },{passive:true});
+      setPane('data');
+    })();
   }
 
   /* ======================================================================
