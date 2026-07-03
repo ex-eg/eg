@@ -781,6 +781,32 @@
     color:var(--muted);cursor:pointer;font-size:11px;line-height:1}
   .link-chip button:hover{background:rgba(255,107,107,.2);color:#ff9a9a}
 
+  /* ---------- in-profile media: image gallery + youtube videos (card) ---------- */
+  .pf-media{padding:0 clamp(20px,3.5vw,34px) clamp(22px,3.5vw,30px)}
+  .pf-media .pf-sec{margin-top:22px}
+  .pf-gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:8px;margin-top:4px}
+  .pf-gitem{display:block;border-radius:10px;overflow:hidden;border:1px solid var(--p-stroke);
+    aspect-ratio:1/1;background:var(--p-soft)}
+  .pf-gitem img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .3s}
+  .pf-gitem:hover img{transform:scale(1.06)}
+  .pf-videos{display:flex;flex-direction:column;gap:12px;margin-top:4px}
+  .pf-video{position:relative;width:100%;aspect-ratio:16/9;border-radius:12px;overflow:hidden;
+    border:1px solid var(--p-stroke);background:#000}
+  .pf-video iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+
+  /* ---------- builder media chips ---------- */
+  .media-list{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+  .media-chip{display:inline-flex;align-items:center;gap:8px;font-size:12px;color:var(--muted);
+    background:rgba(255,255,255,.03);border:1px solid var(--stroke-soft);border-radius:100px;padding:5px 6px 5px 10px}
+  .media-chip img{width:26px;height:26px;border-radius:6px;object-fit:cover;flex:none}
+  .media-chip svg{width:16px;height:16px;color:var(--gold-2);flex:none}
+  .media-chip.vid svg{color:#ff6b6b}
+  .media-chip.bad{color:#ff9a9a;border-color:rgba(255,107,107,.35)}
+  .media-chip .mc-t{max-width:170px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .media-chip button{width:20px;height:20px;border-radius:50%;border:none;background:rgba(255,255,255,.06);
+    color:var(--muted);cursor:pointer;font-size:11px;line-height:1;flex:none}
+  .media-chip button:hover{background:rgba(255,107,107,.2);color:#ff9a9a}
+
   /* ---------- light mode (site chrome) ---------- */
   html[data-mode="light"]{
     --bg:#eef1f7; --bg-2:#e4e9f2; --panel:#ffffff;
@@ -1234,21 +1260,25 @@
   <div class="toast" id="toast">تم النسخ ✓</div>
 
 <script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-app.js";
-  import { getDatabase, ref, set, get, child, remove } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-database.js";
+/* elgoharyX — Firebase initialization.
+   Single source of truth for the database connection. Every module that needs
+   the DB imports `db` and the helpers from here instead of re-initializing. */
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-app.js";
+import { getDatabase, ref, set, get, child, remove } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-database.js";
 
-  const firebaseConfig = {
-    apiKey: "AIzaSyDynVoQRSD9icEcXfEz8Fdjms-sNd9gz9Y",
-    authDomain: "xogame-a4254.firebaseapp.com",
-    databaseURL: "https://xogame-a4254-default-rtdb.firebaseio.com",
-    projectId: "xogame-a4254",
-    storageBucket: "xogame-a4254.firebasestorage.app",
-    messagingSenderId: "961834791643",
-    appId: "1:961834791643:web:4916dd3cd8fa577d2f92fe",
-    measurementId: "G-SESYRWKR5J"
-  };
-  const app = initializeApp(firebaseConfig);
-  const db  = getDatabase(app);
+const firebaseConfig = {
+  apiKey: "AIzaSyDynVoQRSD9icEcXfEz8Fdjms-sNd9gz9Y",
+  authDomain: "xogame-a4254.firebaseapp.com",
+  databaseURL: "https://xogame-a4254-default-rtdb.firebaseio.com",
+  projectId: "xogame-a4254",
+  storageBucket: "xogame-a4254.firebasestorage.app",
+  messagingSenderId: "961834791643",
+  appId: "1:961834791643:web:4916dd3cd8fa577d2f92fe",
+  measurementId: "G-SESYRWKR5J"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
 
   /* ---------- helpers ---------- */
   const LOGO='https://i.ibb.co/1t1TCvH7/103777.png';
@@ -1553,6 +1583,24 @@
   const timelineItems=d=>detailRows(d).map(r=>`<div class="tl-item"><span class="tl-dot"></span><div class="tl-c"><div class="l">${esc(r[0])}</div><div class="v">${esc(r[1])}</div></div></div>`).join('');
   const detailsPlain=d=>[['university',d.university],['field',d.specialization],['degree',d.degree],['interests',d.interests]].filter(r=>r[1]).map(r=>`<span class="tk">${r[0]}</span><span class="tsep">:</span> ${esc(r[1])}`).join('<br>');
 
+  /* ---------- media: image gallery + YouTube videos inside the profile ---------- */
+  const ytId=u=>{ const s=String(u||'').trim();
+    const m=s.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?(?:.*&)?v=|embed\/|shorts\/|live\/|v\/))([\w-]{11})/);
+    return m?m[1]:(/^[\w-]{11}$/.test(s)?s:''); };
+  const galleryArr=d=>Array.isArray(d.gallery)?d.gallery.filter(u=>typeof u==='string'&&u.trim()):[];
+  const videosArr =d=>Array.isArray(d.videos)?d.videos.map(ytId).filter(Boolean):[];
+  const hasMedia  =d=>galleryArr(d).length>0||videosArr(d).length>0;
+  const pfGallery=d=>{ const a=galleryArr(d); if(!a.length) return '';
+    return `<div class="pf-gallery">${a.map((u,i)=>`<a class="pf-gitem" href="${esc(u)}" target="_blank" rel="noopener" title="عرض الصورة"><img src="${esc(u)}" alt="صورة ${i+1}" loading="lazy" onerror="this.closest('.pf-gitem').remove()"/></a>`).join('')}</div>`; };
+  const pfVideos=d=>{ const a=videosArr(d); if(!a.length) return '';
+    return `<div class="pf-videos">${a.map(id=>`<div class="pf-video"><iframe src="https://www.youtube-nocookie.com/embed/${id}" title="فيديو يوتيوب" loading="lazy" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>`).join('')}</div>`; };
+  const pfMedia=d=>{ if(!hasMedia(d)) return '';
+    const g=pfGallery(d), v=pfVideos(d);
+    return `<div class="pf-media">
+      ${g?`${secHead('Gallery','معرض الصور')}${g}`:''}
+      ${v?`${secHead('Videos','فيديوهات')}${v}`:''}
+    </div>`; };
+
   const LAYOUT_FN = {
     classic:d=>`${pfCover(d)}<div class="pf-inner">
         <div class="pf-top">${pfAvatar(d)}<div class="pf-who">${pfWho(d)}</div></div>
@@ -1676,6 +1724,7 @@
     const article = `<article class="pf t-${t} l-${base}${mods?' '+mods:''}${d.threeD?' is3d':''}">
       ${d.threeD?'<div class="pf-glare"></div>':''}
       ${LAYOUT_FN[base](d)}
+      ${pfMedia(d)}
     </article>`;
     const m = MOTIONS.some(x=>x.id===d.motion3d && x.id!=='none') ? d.motion3d : '';
     return m ? `<div class="pf-motion m3d-${m}">${article}</div>` : article;
@@ -1764,7 +1813,7 @@
     about:'أستاذ جامعي وباحث بخبرة تتجاوز عشرين عاماً في مجالات الذكاء الاصطناعي وتعلّم الآلة ومعالجة اللغة الطبيعية. أُشرف على طلاب الدراسات العليا وأقود عدداً من المشروعات البحثية، وأسعى دائماً لربط المعرفة الأكاديمية بالتطبيقات العملية التي تخدم المجتمع.',
     university:'جامعة القاهرة', universityEn:'Cairo University', faculty:'كلية الهندسة',
     specialization:'ذكاء اصطناعي · تعلّم آلة', degree:'أستاذ دكتور', interests:'',
-    threeD:false, anim:'rise', motion3d:'none', photoPos:'50% 50%', photoZoom:1, links:[],
+    threeD:false, anim:'rise', motion3d:'none', photoPos:'50% 50%', photoZoom:1, links:[], gallery:[], videos:[],
     email:'s.elazhary@cu.edu.eg', phone:'+20221000000',
     photo:'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj2A4UZQ9zLBWdO3oDvM9HfmLz8Hg8rne9GB-KEAnm6Y-_iJF4r4NdGMEPInRzrrw9Zuye-HTDCXIIK6FZh3Sgx3HqboQLkzRNLf9cksKCDp4xgydAs4kHCBayiP3JG1K17PDI2oVFN7YD9p88plFVjs60BfX3I7qGoKe_yjX5Vu7dlgY1zxYhpUwStKsc/s1600/a5b90f46-0789-4e9b-a41c-a2e054810503.jpg',
   };
@@ -1773,7 +1822,7 @@
     name:'', nameEn:'', role:'', about:'',
     university:'', universityEn:'University', faculty:'',
     specialization:'', degree:'', interests:'',
-    threeD:false, anim:'rise', motion3d:'none', photoPos:'50% 50%', photoZoom:1, links:[], email:'', phone:'', photo:''
+    threeD:false, anim:'rise', motion3d:'none', photoPos:'50% 50%', photoZoom:1, links:[], gallery:[], videos:[], email:'', phone:'', photo:''
   };
   let state = {...DEFAULTS};
   let currentUser = null;   // {uid, username, email}
@@ -2142,9 +2191,11 @@
       if(!s.exists()){ toast('البروفايل غير موجود'); showMyProfiles(); return; }
       const d=s.val();
       state={...EMPTY};
-      ['template','layout','kicker','name','nameEn','role','about','university','universityEn','faculty','specialization','degree','interests','threeD','anim','motion3d','photoPos','photoZoom','links','email','phone','photo']
+      ['template','layout','kicker','name','nameEn','role','about','university','universityEn','faculty','specialization','degree','interests','threeD','anim','motion3d','photoPos','photoZoom','links','gallery','videos','email','phone','photo']
         .forEach(k=>{ if(d[k]!=null) state[k]=d[k]; });
       if(!Array.isArray(state.links)) state.links = state.links?Object.values(state.links):[];
+      if(!Array.isArray(state.gallery)) state.gallery = state.gallery?Object.values(state.gallery):[];
+      if(!Array.isArray(state.videos)) state.videos = state.videos?Object.values(state.videos):[];
       editingId=id;
       editMeta={ownerUid:d.ownerUid||currentUser.uid, ownerName:d.ownerName||currentUser.username, createdAt:d.createdAt||Date.now()};
       showBuilder(); window.scrollTo(0,0);
@@ -2268,6 +2319,32 @@
           </div>
         </details>
 
+        <details class="acc">
+          <summary><span class="sum-t">${UICON.grid} معرض الصور والفيديو</span></summary>
+          <div class="acc-body">
+            <div class="field">
+              <label>معرض صور داخل البروفايل</label>
+              <div class="upload-row">
+                <input id="galVal" placeholder="ألصق رابط صورة… https://"/>
+                <button type="button" class="btn ghost" id="galUp">${IC2.up} رفع صورة</button>
+                <button type="button" class="btn ghost" id="galAdd" style="padding:11px 16px">إضافة</button>
+              </div>
+              <input type="file" id="galFile" accept="image/*" hidden/>
+              <div class="up-note" id="galNote">أضف صوراً متعددة (رابط أو رفع) تظهر داخل البروفايل كمعرض أنيق.</div>
+              <div class="media-list" id="galList"></div>
+            </div>
+            <div class="field">
+              <label>فيديوهات يوتيوب</label>
+              <div class="link-add">
+                <input id="vidVal" placeholder="رابط يوتيوب… youtu.be/… أو youtube.com/watch?v=…"/>
+                <button type="button" class="btn ghost" id="vidAdd" style="padding:11px 16px">إضافة</button>
+              </div>
+              <div class="up-note" id="vidNote">ألصق رابط الفيديو ثم اضغط «إضافة» — يظهر مدمجاً داخل البروفايل.</div>
+              <div class="media-list" id="vidList"></div>
+            </div>
+          </div>
+        </details>
+
         </div>
 
         <div class="bpane" data-pane="contact">
@@ -2374,6 +2451,51 @@
       state.links.push({type,value}); $('#linkVal').value=''; renderLinks(); paint();
     };
     const lv=$('#linkVal'); if(lv) lv.addEventListener('keydown',e=>{ if(e.key==='Enter'){ e.preventDefault(); $('#linkAdd').click(); } });
+
+    // media: in-profile image gallery + youtube videos
+    state.gallery = Array.isArray(state.gallery)?state.gallery.filter(Boolean):[];
+    state.videos  = Array.isArray(state.videos)?state.videos.filter(Boolean):[];
+    const renderGallery=()=>{
+      const el=$('#galList'); if(!el) return;
+      el.innerHTML = state.gallery.length ? state.gallery.map((u,i)=>
+        `<span class="media-chip"><img src="${esc(u)}" alt="" onerror="this.style.display='none'"/><span class="mc-t">صورة ${i+1}</span><button data-grm="${i}" title="حذف">✕</button></span>`).join('')
+        : '<span class="link-empty">لا توجد صور في المعرض بعد.</span>';
+      el.querySelectorAll('[data-grm]').forEach(b=>b.onclick=()=>{ state.gallery.splice(+b.dataset.grm,1); renderGallery(); paint(); });
+    };
+    const renderVideos=()=>{
+      const el=$('#vidList'); if(!el) return;
+      el.innerHTML = state.videos.length ? state.videos.map((u,i)=>{ const id=ytId(u);
+        return `<span class="media-chip vid${id?'':' bad'}">${UICON.play}<span class="mc-t">${id?('يوتيوب — '+id):'رابط غير صالح'}</span><button data-vrm="${i}" title="حذف">✕</button></span>`;}).join('')
+        : '<span class="link-empty">لا توجد فيديوهات بعد.</span>';
+      el.querySelectorAll('[data-vrm]').forEach(b=>b.onclick=()=>{ state.videos.splice(+b.dataset.vrm,1); renderVideos(); paint(); });
+    };
+    renderGallery(); renderVideos();
+    const galAdd=$('#galAdd'); if(galAdd) galAdd.onclick=()=>{
+      const v=$('#galVal').value.trim(); if(!v){ toast('ألصق رابط صورة'); return; }
+      state.gallery.push(v); $('#galVal').value=''; renderGallery(); paint();
+    };
+    const gvv=$('#galVal'); if(gvv) gvv.addEventListener('keydown',e=>{ if(e.key==='Enter'){ e.preventDefault(); $('#galAdd').click(); }});
+    const galUp=$('#galUp'), galFile=$('#galFile'), galNote=$('#galNote');
+    if(galUp){
+      galUp.onclick=()=>galFile.click();
+      galFile.onchange=async()=>{
+        const f=galFile.files&&galFile.files[0]; if(!f) return;
+        if(!/^image\//.test(f.type)){ galNote.className='up-note'; galNote.textContent='الملف المختار ليس صورة'; return; }
+        if(f.size>32*1024*1024){ galNote.className='up-note'; galNote.textContent='حجم الصورة يتجاوز 32MB'; return; }
+        const old=galUp.innerHTML; galUp.disabled=true; galUp.textContent='جارٍ الرفع…';
+        galNote.className='up-note'; galNote.textContent='جارٍ رفع الصورة…';
+        try{ const url=await uploadToImgbb(f); state.gallery.push(url); renderGallery(); paint();
+          galNote.className='up-note ok'; galNote.textContent='✓ تمت إضافة الصورة إلى المعرض'; }
+        catch(e){ console.error(e); galNote.className='up-note'; galNote.textContent='تعذّر رفع الصورة، حاول مجدداً'; }
+        finally{ galUp.disabled=false; galUp.innerHTML=old; galFile.value=''; }
+      };
+    }
+    const vidAdd=$('#vidAdd'); if(vidAdd) vidAdd.onclick=()=>{
+      const v=$('#vidVal').value.trim(); if(!v){ toast('ألصق رابط يوتيوب'); return; }
+      if(!ytId(v)){ toast('رابط يوتيوب غير صالح'); return; }
+      state.videos.push(v); $('#vidVal').value=''; renderVideos(); paint();
+    };
+    const vvv=$('#vidVal'); if(vvv) vvv.addEventListener('keydown',e=>{ if(e.key==='Enter'){ e.preventDefault(); $('#vidAdd').click(); }});
 
     // image upload -> imgbb -> photo url
     const upBtn=$('#upBtn'), upFile=$('#upFile'), upNote=$('#upNote');
@@ -2559,6 +2681,106 @@
     route();
   })();
 </script>
-<script src="js/pwa.js" defer></script>
+<script>
+/* elgoharyX — PWA install experience
+   - Registers the service worker
+   - Android/Chrome: captures beforeinstallprompt and shows a custom install bar
+   - iOS Safari: shows "Add to Home Screen" instructions (no native prompt there)
+   The bar is dismissible and remembers the choice, so it never nags. */
+(function () {
+  'use strict';
+
+  var LOGO = 'https://i.ibb.co/1t1TCvH7/103777.png';
+  var DISMISS_KEY = 'apb_pwa_dismissed';
+
+  // Register the service worker (enables offline + installability).
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function () {
+      navigator.serviceWorker.register('./sw.js').catch(function (err) {
+        console.warn('SW registration failed:', err);
+      });
+    });
+  }
+
+  var isStandalone =
+    window.matchMedia('(display-mode: standalone)').matches ||
+    window.navigator.standalone === true;
+
+  var isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent) &&
+    !window.MSStream;
+
+  function dismissed() {
+    try { return localStorage.getItem(DISMISS_KEY) === '1'; } catch (e) { return false; }
+  }
+  function rememberDismiss() {
+    try { localStorage.setItem(DISMISS_KEY, '1'); } catch (e) {}
+  }
+
+  var deferredPrompt = null;
+
+  function buildBanner(bodyHTML, withInstallBtn) {
+    if (document.getElementById('pwaBanner')) return null;
+    var el = document.createElement('div');
+    el.className = 'pwa-banner';
+    el.id = 'pwaBanner';
+    el.innerHTML =
+      '<img class="pwa-logo" src="' + LOGO + '" alt="elgoharyX"/>' +
+      '<div class="pwa-txt">' + bodyHTML + '</div>' +
+      (withInstallBtn ? '<button class="pwa-install" id="pwaInstall">تثبيت</button>' : '') +
+      '<button class="pwa-x" id="pwaClose" aria-label="إغلاق">&times;</button>';
+    document.body.appendChild(el);
+    // animate in on next frame
+    requestAnimationFrame(function () { el.classList.add('show'); });
+    document.getElementById('pwaClose').addEventListener('click', function () {
+      hideBanner(); rememberDismiss();
+    });
+    return el;
+  }
+
+  function hideBanner() {
+    var el = document.getElementById('pwaBanner');
+    if (!el) return;
+    el.classList.remove('show');
+    setTimeout(function () { if (el.parentNode) el.parentNode.removeChild(el); }, 320);
+  }
+
+  // ----- Android / Chromium: native install flow -----
+  window.addEventListener('beforeinstallprompt', function (e) {
+    e.preventDefault();
+    deferredPrompt = e;
+    if (isStandalone || dismissed()) return;
+    var b = buildBanner(
+      '<b>ثبّت التطبيق على جهازك</b><span>للوصول السريع والعمل دون اتصال — دون متجر تطبيقات.</span>',
+      true
+    );
+    if (!b) return;
+    document.getElementById('pwaInstall').addEventListener('click', function () {
+      hideBanner();
+      if (!deferredPrompt) return;
+      deferredPrompt.prompt();
+      deferredPrompt.userChoice.finally(function () { deferredPrompt = null; });
+    });
+  });
+
+  window.addEventListener('appinstalled', function () {
+    deferredPrompt = null;
+    hideBanner();
+    rememberDismiss();
+  });
+
+  // ----- iOS Safari: manual instructions (no beforeinstallprompt) -----
+  window.addEventListener('load', function () {
+    if (isIOS && !isStandalone && !dismissed()) {
+      setTimeout(function () {
+        buildBanner(
+          '<b>ثبّت التطبيق على الآيفون</b>' +
+          '<span>اضغط زر المشاركة <span class="pwa-ico">&#x2191;</span> ثم اختر «إضافة إلى الشاشة الرئيسية».</span>',
+          false
+        );
+      }, 1800);
+    }
+  });
+})();
+</script>
 </body>
 </html>
