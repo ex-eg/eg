@@ -1446,6 +1446,65 @@
   .rte-editor li{margin:4px 0}
   .rte-editor a{color:var(--gold-2);text-decoration:underline}
 
+  /* ---------- code blocks inside articles + the editor ---------- */
+  .art-body pre{background:#0c1220;color:#e8eefb;border:1px solid var(--b-stroke);border-radius:12px;
+    padding:16px 18px;margin:22px 0;overflow-x:auto;direction:ltr;text-align:left;
+    font-family:"Space Grotesk",ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;font-size:14px;line-height:1.75;
+    -webkit-overflow-scrolling:touch;tab-size:2}
+  .art-body pre code{background:none;padding:0;border:none;color:inherit;font-size:inherit}
+  .art-body code{font-family:ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;
+    background:color-mix(in srgb,var(--b-muted) 22%,transparent);color:var(--b-head);
+    padding:2px 7px;border-radius:6px;font-size:.88em;direction:ltr;unicode-bidi:embed}
+  .rte-editor pre{background:rgba(0,0,0,.3);color:var(--txt);border:1px solid var(--stroke);border-radius:10px;
+    padding:12px 14px;margin:12px 0;overflow-x:auto;direction:ltr;text-align:left;white-space:pre-wrap;
+    font-family:"Space Grotesk",ui-monospace,Consolas,monospace;font-size:13.5px;line-height:1.7}
+  .rte-editor pre code{background:none;padding:0;font-family:inherit}
+  .rte-editor code{font-family:ui-monospace,"Space Grotesk",Consolas,monospace;background:rgba(0,0,0,.3);
+    padding:1px 6px;border-radius:5px;font-size:.9em;direction:ltr;unicode-bidi:embed}
+
+  /* ---------- blog admin (single-blog dashboard) ---------- */
+  .badm-hero{display:flex;align-items:center;gap:16px;flex-wrap:wrap;border:1px solid var(--stroke);border-radius:16px;
+    padding:18px 20px;margin-bottom:20px;background:linear-gradient(180deg,var(--panel),var(--bg-2))}
+  .badm-logo{width:58px;height:58px;border-radius:14px;display:grid;place-items:center;flex:none;color:#fff;overflow:hidden;
+    font-family:"Cormorant Garamond",serif;font-weight:700;font-size:24px}
+  .badm-logo img{width:100%;height:100%;object-fit:cover}
+  .badm-id{flex:1;min-width:170px}
+  .badm-id h2{font-family:"Cormorant Garamond",serif;font-size:24px;margin-bottom:3px}
+  .badm-id .sub{color:var(--muted);font-size:13px}
+  .badm-acts{display:flex;gap:8px;flex-wrap:wrap}
+  .badm-acts a,.badm-acts button{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--stroke);
+    background:rgba(255,255,255,.03);color:var(--txt);border-radius:10px;padding:9px 14px;font-family:inherit;
+    font-size:13px;cursor:pointer;text-decoration:none;transition:.18s}
+  .badm-acts a:hover,.badm-acts button:hover{border-color:var(--gold);color:var(--gold-2)}
+  .badm-bar{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:8px 0 14px}
+  .badm-bar h3{font-family:"Cormorant Garamond",serif;font-size:20px}
+  .badm-posts{display:flex;flex-direction:column;gap:10px}
+  .badm-post{display:flex;align-items:center;gap:14px;border:1px solid var(--stroke);border-radius:13px;padding:12px 14px;
+    background:rgba(255,255,255,.02)}
+  .badm-post .bp-th{width:52px;height:52px;border-radius:10px;object-fit:cover;flex:none;background:var(--stroke);
+    display:grid;place-items:center;color:var(--muted);font-weight:700;font-family:"Cormorant Garamond",serif;font-size:20px}
+  .badm-post .bp-main{flex:1;min-width:0}
+  .badm-post .bp-title{font-weight:600;font-size:14.5px;color:var(--txt);margin-bottom:5px;
+    overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .badm-post .bp-meta{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:11.5px;color:var(--muted-2)}
+  .badm-post .bp-stat{padding:2px 10px;border-radius:100px;font-weight:600;font-size:11px}
+  .badm-post .bp-stat.on{color:#7ee0a8;background:rgba(80,200,120,.14)}
+  .badm-post .bp-stat.off{color:#ffb86b;background:rgba(255,170,80,.14)}
+  .badm-post .bp-acts{display:flex;gap:6px;flex-wrap:wrap;flex:none}
+  .badm-post .bp-acts button{display:inline-flex;align-items:center;gap:5px;border:1px solid var(--stroke);background:none;
+    color:var(--muted);border-radius:8px;padding:7px 11px;font-family:inherit;font-size:12px;cursor:pointer;transition:.15s}
+  .badm-post .bp-acts button:hover{color:var(--txt);border-color:var(--gold)}
+  .badm-post .bp-acts button.danger{color:#ff8f9e}
+  .badm-post .bp-acts button.danger:hover{border-color:#ff8f9e;color:#ff8f9e}
+  @media(max-width:600px){
+    .badm-hero{padding:15px}
+    .badm-acts{width:100%}
+    .badm-acts a,.badm-acts button{flex:1;justify-content:center}
+    .badm-post{flex-wrap:wrap}
+    .badm-post .bp-acts{width:100%;justify-content:stretch}
+    .badm-post .bp-acts button{flex:1;justify-content:center}
+  }
+
   /* ---------- blog explorer (public directory of all blogs) ---------- */
   .xp-hero{position:relative;overflow:hidden;border-bottom:1px solid var(--stroke-soft);
     background:radial-gradient(900px 460px at 82% -20%,rgba(47,93,176,.22),transparent 60%),radial-gradient(700px 420px at 0% 120%,rgba(201,165,72,.12),transparent 55%)}
@@ -2105,7 +2164,10 @@ const db = getDatabase(app);
     const salt=shortId(16);
     return { viewSalt:salt, viewPassHash:await hashViewPass(salt,p) };
   }
-  const isLocked=d=>!!(d&&d.viewPassHash);
+  /* Link password protection was removed — links are shared openly; profiles are
+     shared for editing via a dedicated edit link instead. Kept as a no-op so any
+     old records that still carry a viewPassHash simply open without a gate. */
+  const isLocked=d=>false;
   const unlockKey=(kind,id)=>'apb_unlock_'+kind+'_'+id;
   const wasUnlocked=(kind,id)=>{ try{ return sessionStorage.getItem(unlockKey(kind,id))==='1'; }catch{ return false; } };
   const markUnlocked=(kind,id)=>{ try{ sessionStorage.setItem(unlockKey(kind,id),'1'); }catch{} };
@@ -2190,7 +2252,7 @@ const db = getDatabase(app);
         <div class="ab-nav">
           <button class="btn ghost" data-nav="explore" style="padding:9px 15px;font-size:13px${active==='explore'?';border-color:var(--gold);color:var(--txt)':''}">استكشف</button>
           <button class="btn ghost" data-nav="mine" style="padding:9px 15px;font-size:13px${active==='mine'?';border-color:var(--gold);color:var(--txt)':''}">بروفايلاتي</button>
-          <button class="btn ghost" data-nav="blogs" style="padding:9px 15px;font-size:13px${active==='blogs'?';border-color:var(--gold);color:var(--txt)':''}">مدوناتي</button>
+          <button class="btn ghost" data-nav="blogs" style="padding:9px 15px;font-size:13px${active==='blogs'?';border-color:var(--gold);color:var(--txt)':''}">مدونتي</button>
           <button class="btn ghost" data-nav="new" style="padding:9px 15px;font-size:13px">+ بروفايل</button>
           <button class="btn ghost" data-nav="newblog" style="padding:9px 15px;font-size:13px">+ مدونة</button>
           <button class="btn ghost" data-act="logout" style="padding:9px 13px;font-size:13px">خروج</button>
@@ -2224,7 +2286,7 @@ const db = getDatabase(app);
         <nav class="drawer-nav">
           <button class="dr-item ${active==='explore'?'on':''}" data-nav="explore">${TAB.cards}<span>استكشف المدونات</span></button>
           <button class="dr-item ${active==='mine'?'on':''}" data-nav="mine">${TAB.cards}<span>بروفايلاتي</span></button>
-          <button class="dr-item ${active==='blogs'?'on':''}" data-nav="blogs">${TAB.cards}<span>مدوناتي</span></button>
+          <button class="dr-item ${active==='blogs'?'on':''}" data-nav="blogs">${TAB.cards}<span>مدونتي</span></button>
           <button class="dr-item ${active==='build'?'on':''}" data-nav="new">${TAB.plus}<span>بروفايل جديد</span></button>
           <button class="dr-item" data-nav="newblog">${TAB.plus}<span>مدونة جديدة</span></button>
           <button class="dr-item" data-act="mode">${TAB.mode}<span>تبديل الوضع (ليلي / نهاري)</span></button>
@@ -2316,7 +2378,7 @@ const db = getDatabase(app);
     document.querySelectorAll('[data-nav]').forEach(b=>b.onclick=()=>{
       const n=b.dataset.nav;
       if(n==='mine') showMyProfiles();
-      else if(n==='blogs') showMyBlogs();
+      else if(n==='blogs') showBlogAdmin();
       else if(n==='explore') showExplore();
       else if(n==='new') newProfile();
       else if(n==='newblog') newBlog();
@@ -2504,7 +2566,6 @@ const db = getDatabase(app);
     if(!currentUser){ showAuth('login'); return; }
     const editing = editingId!==null;
     const sharedEdit = editing && editMeta && editMeta.ownerUid!==currentUser.uid;
-    const protectedNow = editing && editMeta && !!editMeta.viewPassHash;
     document.title = editing ? 'تعديل البروفايل' : 'منشئ البروفايلات الأكاديمية';
     document.body.style.background='';
     $('#app').innerHTML = appbar('build') + `
@@ -2659,19 +2720,11 @@ const db = getDatabase(app);
         </details>
 
         <details class="acc">
-          <summary><span class="sum-t">${TAB.privacy} حماية الرابط بكلمة مرور</span></summary>
+          <summary><span class="sum-t">${IC2.share} مشاركة البروفايل للتعديل</span></summary>
           <div class="acc-body">
-            <div class="field">
-              <label>كلمة مرور الرابط (اختياري)</label>
-              <input id="f-viewPass" type="password" autocomplete="new-password" placeholder="${protectedNow?'محمي حالياً — اكتب كلمة مرور جديدة لتغييرها':'اتركه فارغاً ليكون الرابط عاماً'}"/>
-              <div class="up-note ${protectedNow?'ok':''}" id="viewPassNote">${protectedNow
-                ? '🔒 هذا البروفايل محمي حالياً. من يفتح الرابط يجب أن يُدخل كلمة المرور.'
-                : 'عند تعيين كلمة مرور، لن يُفتح الرابط إلا بها — فلو تسرّب الرابط يبقى محتواك محمياً.'}</div>
-              ${protectedNow?`<label class="opt-row" style="margin-top:10px;cursor:pointer">
-                <div><div class="lbl">إزالة الحماية</div><div class="desc">اجعل الرابط عاماً بدون كلمة مرور</div></div>
-                <span class="switch"><input type="checkbox" id="f-viewPassRemove"><span class="slider"></span></span>
-              </label>`:''}
-            </div>
+            <div class="up-note ok" style="margin-bottom:0">${editing
+              ? 'رابط بروفايلك عام للعرض. لمشاركته مع من يعدّل معك، انسخ «رابط المشاركة للتعديل» من نافذة الحفظ أو من صفحة «بروفايلاتي».'
+              : 'بعد الحفظ ستحصل على رابطين: رابط عام للعرض، و«رابط مشاركة للتعديل» تعطيه لمن تريد أن يعدّل البروفايل معك.'}</div>
           </div>
         </details>
         </div>
@@ -2871,26 +2924,17 @@ const db = getDatabase(app);
         const ownerName = editing ? editMeta.ownerName : currentUser.username;
         const createdAt = editing ? editMeta.createdAt : Date.now();
         const id = editingId || await uniqueShortId();
-        // resolve the optional link password (kept in the same record as the data)
-        let viewSalt     = editing && editMeta ? (editMeta.viewSalt||null)     : null;
-        let viewPassHash = editing && editMeta ? (editMeta.viewPassHash||null) : null;
-        const newPass   = ($('#f-viewPass')?.value||'').trim();
-        const removePass= $('#f-viewPassRemove')?.checked;
-        if(removePass){ viewSalt=null; viewPassHash=null; }
-        else if(newPass){ const vp=await buildViewPass(newPass); viewSalt=vp.viewSalt; viewPassHash=vp.viewPassHash; }
-        const clean = {...state, ownerUid:owner, ownerName, createdAt, updatedAt:Date.now(), viewSalt, viewPassHash};
+        const clean = {...state, ownerUid:owner, ownerName, createdAt, updatedAt:Date.now(), viewSalt:null, viewPassHash:null};
         await set(ref(db,'profiles/'+id), clean);
-        await set(ref(db,'userProfiles/'+owner+'/'+id), {name:state.name||'بدون اسم', template:state.template, updatedAt:Date.now(), locked:!!viewPassHash});
+        await set(ref(db,'userProfiles/'+owner+'/'+id), {name:state.name||'بدون اسم', template:state.template, updatedAt:Date.now()});
         // now in edit mode for subsequent saves
-        editingId=id; editMeta={ownerUid:owner, ownerName, createdAt, viewSalt, viewPassHash};
+        editingId=id; editMeta={ownerUid:owner, ownerName, createdAt};
 
         const base=location.href.split('#')[0].split('?')[0];
         const full=base+'?id='+id;
         editLink=base+'?edit='+id;
         $('#ovTitle').textContent = editing?'تم حفظ التغييرات':'تم إنشاء البروفايل';
-        $('#ovDesc').textContent = viewPassHash
-          ? '🔒 رابط محمي بكلمة مرور — لن يُفتح إلا بها، فشاركه مع كلمة المرور.'
-          : 'هذا هو رابط بروفايلك الدائم — شاركه مع من تريد.';
+        $('#ovDesc').textContent = 'رابط عام للعرض بالأسفل — وبالأسفل «رابط المشاركة للتعديل» لمن يعدّل معك.';
         $('#outLink').value=full; $('#openLink').href=full;
         $('#ov').classList.add('show');
 
@@ -3076,7 +3120,10 @@ const db = getDatabase(app);
   /* strip tags → plain text (safe, no script execution) for excerpts & word counts */
   function stripHTML(html){ try{ return (new DOMParser().parseFromString(String(html||''),'text/html').body.textContent||'').replace(/\s+/g,' ').trim(); }catch{ return String(html||'').replace(/<[^>]*>/g,' '); } }
   const blogReadTime = body => { const w=stripHTML(body).split(/\s+/).filter(Boolean).length; return Math.max(1,Math.round(w/180))+' دقائق قراءة'; };
-  const blogPosts = d => Array.isArray(d.posts)?d.posts.filter(Boolean):[];
+  /* public post list — hides unpublished drafts (published===false). Posts with no
+     flag (legacy) are treated as published. Admin/builder use the raw array instead. */
+  const blogPosts = d => Array.isArray(d.posts)?d.posts.filter(p=>p&&p.published!==false):[];
+  const blogAllPosts = d => Array.isArray(d.posts)?d.posts.filter(Boolean):[];
   /* turn plain post text into rich HTML (## heading, ### sub, > quote, blank line = new paragraph).
      Parses line-by-line so a heading immediately followed by body text renders correctly. */
   function formatArticle(text){
@@ -3162,6 +3209,10 @@ const db = getDatabase(app);
     <span class="rte-sep"></span>
     <button type="button" class="rte-btn" data-cmd="createLink" title="إدراج رابط">${_rsvg('<path d="M10 13a5 5 0 0 0 7 0l2-2a5 5 0 0 0-7-7l-1 1"/><path d="M14 11a5 5 0 0 0-7 0l-2 2a5 5 0 0 0 7 7l1-1"/>')}</button>
     <button type="button" class="rte-btn" data-rteimg title="إدراج صورة">${_rsvg('<rect x="3" y="4" width="18" height="16" rx="2.5"/><circle cx="8.5" cy="9.5" r="1.6"/><path d="M21 16l-5-5-9 9"/>')}</button>
+    <span class="rte-sep"></span>
+    <button type="button" class="rte-btn" data-codeblock title="كتلة كود برمجي">${_rsvg('<path d="M8 8l-4 4 4 4M16 8l4 4-4 4M13.5 5l-3 14"/>')}</button>
+    <button type="button" class="rte-btn" data-codeinline title="كود ضمن السطر"><span style="font-family:ui-monospace,monospace;font-size:14px;font-weight:700">&lt;&#47;&gt;</span></button>
+    <span class="rte-sep"></span>
     <button type="button" class="rte-btn" data-cmd="removeFormat" title="مسح التنسيق">${_rsvg('<path d="M6 6l12 12M18 6 6 18"/>')}</button>
   </div>`;
 
@@ -3295,54 +3346,116 @@ const db = getDatabase(app);
     window.scrollTo(0,0);
   }
 
-  /* ---------- my blogs (dashboard) ---------- */
-  async function showMyBlogs(){
-    if(!currentUser){ showAuth('login'); return; }
-    document.title='مدوناتي — elgoharyX';
-    document.body.style.background='';
-    $('#app').innerHTML = appbar('blogs') + `<div class="wrap">
-      <div class="mp-head">
-        <div><h2>مدوناتي</h2><div class="sub">جميع المدونات المرتبطة بحسابك.</div></div>
-        <button class="btn primary" id="mkNewBlog" style="width:auto;padding:12px 22px">+ مدونة جديدة</button>
+  /* ---------- blog admin (single blog per account) ----------
+     Each account owns exactly one blog. This page manages it: view/share/edit the
+     blog, and manage every post — edit, publish/unpublish, delete, or add a new one. */
+  function blogAdminView(id,d){
+    const dz=blogDesign(d.design);
+    const base=location.href.split('#')[0].split('?')[0];
+    const posts=Array.isArray(d.posts)?d.posts.filter(Boolean):[];
+    const grad=`linear-gradient(135deg,${dz.accent},${dz.accent2})`;
+    const logo = d.logo
+      ? `<span class="badm-logo" style="background:${grad}"><img src="${esc(d.logo)}" alt="" onerror="this.remove()"/></span>`
+      : `<span class="badm-logo" style="background:${grad}">${esc(initials(d.title||'م'))}</span>`;
+    const rows = posts.length ? posts.map((p,i)=>{
+      const pub = p.published!==false;
+      const th = p.cover
+        ? `<img class="bp-th" src="${esc(p.cover)}" alt="" onerror="this.outerHTML='<span class=&quot;bp-th&quot;>${esc(initials(p.title||'#'))}</span>'"/>`
+        : `<span class="bp-th">${esc(initials(p.title||'#'))}</span>`;
+      return `<div class="badm-post" data-pi="${i}">
+        ${th}
+        <div class="bp-main">
+          <div class="bp-title">${esc(p.title||'مقالة بدون عنوان')}</div>
+          <div class="bp-meta">
+            <span class="bp-stat ${pub?'on':'off'}">${pub?'منشورة':'غير منشورة'}</span>
+            ${p.tag?`<span>${esc(p.tag)}</span>`:''}
+            <span>${blogReadTime(p.body)}</span>
+          </div>
+        </div>
+        <div class="bp-acts">
+          <button data-pedit="${i}">${IC2.pen} تعديل</button>
+          <button data-ppub="${i}">${pub?'إلغاء النشر':'نشر'}</button>
+          <button class="danger" data-pdel="${i}">حذف</button>
+        </div>
+      </div>`;
+    }).join('') : `<div class="mp-empty">لا توجد مقالات بعد — اضغط «مقال جديد» لإضافة أول تدوينة.</div>`;
+    return `<div class="wrap">
+      <div class="badm-hero">
+        ${logo}
+        <div class="badm-id"><h2>${esc(d.title||'مدونتي')}</h2>
+          <div class="sub">${posts.length} تدوينة · تصميم ${esc(dz.name)}</div></div>
+        <div class="badm-acts">
+          <a href="${base}?blog=${id}" target="_blank">${IC2.eye} عرض المدونة</a>
+          <button id="baLink">${IC2.link} نسخ الرابط</button>
+          <button id="baEdit">${IC2.pen} تعديل بيانات المدونة</button>
+        </div>
       </div>
-      <div id="mbList"><div class="loader" style="min-height:200px"><div><div class="spin"></div>جارٍ التحميل…</div></div></div>
-    </div>` + drawer('blogs');
+      <div class="badm-bar"><h3>إدارة التدوينات</h3>
+        <button class="btn primary" id="baNew" style="width:auto;padding:10px 18px">${TAB.plus} مقال جديد</button></div>
+      <div class="badm-posts" id="baPosts">${rows}</div>
+    </div>`;
+  }
+
+  async function showBlogAdmin(){
+    if(!currentUser){ showAuth('login'); return; }
+    document.title='إدارة مدونتي — elgoharyX';
+    document.body.style.background='';
+    const drawEmpty=()=>{
+      $('#app').innerHTML = appbar('blogs') + `<div class="wrap">
+        <div class="mp-head"><div><h2>مدونتي</h2><div class="sub">لكل حساب مدونة واحدة. أنشئ مدونتك وابدأ النشر.</div></div></div>
+        <div class="mp-empty">لا توجد مدونة بعد.<br><br>
+          <button class="btn primary" id="baCreate" style="width:auto;padding:12px 22px">أنشئ مدونتك</button></div>
+      </div>` + drawer('blogs');
+      wireAppbar(); $('#baCreate').onclick=newBlog;
+    };
+    $('#app').innerHTML = appbar('blogs') + `<div class="wrap"><div class="loader" style="min-height:220px"><div><div class="spin"></div>جارٍ التحميل…</div></div></div>` + drawer('blogs');
     wireAppbar();
-    $('#mkNewBlog').onclick=newBlog;
     try{
       const s=await get(child(ref(db),'userBlogs/'+currentUser.uid));
-      const list = s.exists()? Object.entries(s.val()).map(([id,v])=>({id,...v})) : [];
-      list.sort((a,b)=>(b.updatedAt||0)-(a.updatedAt||0));
+      const entries = s.exists()? Object.entries(s.val()) : [];
+      if(!entries.length){ drawEmpty(); return; }
+      entries.sort((a,b)=>((b[1]&&b[1].updatedAt)||0)-((a[1]&&a[1].updatedAt)||0));
+      const id=entries[0][0];
+      const bs=await get(child(ref(db),'blogs/'+id));
+      if(!bs.exists()){ await remove(ref(db,'userBlogs/'+currentUser.uid+'/'+id)); drawEmpty(); return; }
+      const d=bs.val();
+      d.posts = Array.isArray(d.posts)?d.posts.filter(Boolean):[];
       const base=location.href.split('#')[0].split('?')[0];
-      if(!list.length){
-        $('#mbList').innerHTML=`<div class="mp-empty">لا توجد مدونات بعد.<br><br>
-          <button class="btn primary" id="mkNewBlog2" style="width:auto;padding:12px 22px">أنشئ أول مدونة</button></div>`;
-        $('#mkNewBlog2').onclick=newBlog; return;
-      }
-      $('#mbList').innerHTML=`<div class="mp-grid">${list.map(p=>{ const dz=blogDesign(p.design);
-        return `<div class="mp-card">
-          <div class="mp-cover" style="background:linear-gradient(135deg,${dz.accent},${dz.accent2})"><span class="badge">${esc(dz.name)}</span>${p.locked?'<span class="mp-lock" title="محمي بكلمة مرور">🔒</span>':''}</div>
-          <div class="mp-body">
-            <div class="mp-name">${esc(p.title||'مدونة بدون عنوان')}</div>
-            <div class="mp-meta">آخر تحديث: ${p.updatedAt?new Date(p.updatedAt).toLocaleDateString('ar-EG'):'—'}</div>
-            <div class="mp-actions">
-              <a href="${base}?blog=${p.id}" target="_blank">${IC2.eye} عرض</a>
-              <button data-bedit="${p.id}">${IC2.pen} تعديل</button>
-              <button data-blink="${p.id}">${IC2.link} الرابط</button>
-              <button class="del" data-bdel="${p.id}">حذف</button>
-            </div>
-          </div>
-        </div>`;}).join('')}</div>`;
-      $('#mbList').querySelectorAll('[data-bedit]').forEach(b=>b.onclick=()=>startBlogEdit(b.dataset.bedit));
-      $('#mbList').querySelectorAll('[data-blink]').forEach(b=>b.onclick=()=>{navigator.clipboard?.writeText(base+'?blog='+b.dataset.blink);toast('تم نسخ رابط المدونة ✓');});
-      $('#mbList').querySelectorAll('[data-bdel]').forEach(b=>b.onclick=async()=>{
-        if(!confirm('حذف هذه المدونة نهائياً؟')) return;
-        try{ await remove(ref(db,'blogs/'+b.dataset.bdel)); await remove(ref(db,'userBlogs/'+currentUser.uid+'/'+b.dataset.bdel)); await remove(ref(db,'blogIndex/'+b.dataset.bdel)); toast('تم الحذف'); showMyBlogs(); }
-        catch(e){ console.error(e); toast('تعذّر الحذف'); }
-      });
+      const persist=async()=>{
+        d.updatedAt=Date.now();
+        const pub=d.posts.filter(p=>p.published!==false).length;
+        await set(ref(db,'blogs/'+id), d);
+        await set(ref(db,'userBlogs/'+currentUser.uid+'/'+id), {title:d.title||'مدونة', design:d.design, updatedAt:d.updatedAt});
+        await set(ref(db,'blogIndex/'+id), {title:d.title||'مدونة', subtitle:d.subtitle||'', author:d.author||'',
+          cover:d.cover||'', design:d.design, count:pub, updatedAt:d.updatedAt});
+      };
+      const wire=()=>{
+        $('#baLink')&&($('#baLink').onclick=()=>{navigator.clipboard?.writeText(base+'?blog='+id);toast('تم نسخ رابط المدونة ✓');});
+        $('#baEdit')&&($('#baEdit').onclick=()=>startBlogEdit(id));
+        $('#baNew')&&($('#baNew').onclick=()=>startBlogEdit(id,'new'));
+        document.querySelectorAll('[data-pedit]').forEach(b=>b.onclick=()=>startBlogEdit(id,+b.dataset.pedit));
+        document.querySelectorAll('[data-ppub]').forEach(b=>b.onclick=async()=>{
+          const i=+b.dataset.ppub; if(!d.posts[i]) return;
+          d.posts[i].published = (d.posts[i].published===false);
+          b.disabled=true;
+          try{ await persist(); toast(d.posts[i].published?'تم النشر ✓':'تم إلغاء النشر'); }
+          catch(e){ console.error(e); toast('تعذّر الحفظ'); }
+          paint();
+        });
+        document.querySelectorAll('[data-pdel]').forEach(b=>b.onclick=async()=>{
+          if(!confirm('حذف هذه التدوينة نهائياً؟')) return;
+          const i=+b.dataset.pdel; d.posts.splice(i,1);
+          try{ await persist(); toast('تم حذف التدوينة'); }
+          catch(e){ console.error(e); toast('تعذّر الحذف'); }
+          paint();
+        });
+      };
+      function paint(){ $('#app').innerHTML = appbar('blogs') + blogAdminView(id,d) + drawer('blogs'); wireAppbar(); wire(); }
+      paint();
     }catch(e){
       console.error(e);
-      $('#mbList').innerHTML=`<div class="mp-empty">تعذّر تحميل المدونات. تحقّق من قواعد قاعدة البيانات.</div>`;
+      $('#app').innerHTML = appbar('blogs') + `<div class="wrap"><div class="mp-empty">تعذّر تحميل المدونة. تحقّق من قواعد قاعدة البيانات.</div></div>` + drawer('blogs');
+      wireAppbar();
     }
   }
 
@@ -3353,49 +3466,66 @@ const db = getDatabase(app);
     author:'أ. محمد الجوهري', authorEn:'Mohamed Elgohary', about:'مساحة معرفية أنشرها لمشاركة أفكاري وقراءاتي وتجاربي مع كل باحث عن المعرفة.',
     cover:'', logo:'', design:'bd1',
     posts:[
-      {id:'p1',title:'كيف تبني عادة القراءة اليومية',tag:'تطوير ذاتي',date:Date.now(),cover:'',excerpt:'خطوات عملية مبنية على علم النفس السلوكي لتحويل القراءة إلى عادة راسخة تلازمك مدى الحياة.',body:'## البداية الصغيرة\nابدأ بصفحة واحدة يومياً. الهدف ليس الكمية بل الاستمرارية.\n\n## اربطها بعادة قائمة\nاقرأ بعد قهوة الصباح مباشرة؛ العادة القديمة تصبح تذكيراً للعادة الجديدة.\n\n> من قرأ صفحة كل يوم قرأ مكتبة في عمره.\n\n## تتبّع تقدّمك\nسجّل ما تقرأه، فالتقدّم المرئي يغذّي الحافز.'},
-      {id:'p2',title:'الذكاء الاصطناعي ومستقبل التعليم',tag:'تقنية',date:Date.now(),cover:'',excerpt:'كيف تُعيد نماذج الذكاء الاصطناعي تشكيل طريقة تعلّمنا، وما الفرص والمخاطر التي تحملها؟',body:'## تعليم مخصّص للجميع\nيتيح الذكاء الاصطناعي مساراً تعليمياً يناسب كل طالب على حدة.\n\n## دور المعلّم يتغيّر\nلا يختفي المعلّم، بل يتحوّل إلى موجّه وملهم.\n\n## تحديات يجب الانتباه لها\nالخصوصية والاعتماد المفرط والفجوة الرقمية قضايا تحتاج معالجة.'},
-      {id:'p3',title:'فن إدارة الوقت للمنشغلين',tag:'إنتاجية',date:Date.now(),cover:'',excerpt:'أنظمة بسيطة وفعّالة لإدارة وقتك دون الشعور بالإرهاق أو الذنب.',body:'## قاعدة الدقيقتين\nإن كانت المهمة تستغرق أقل من دقيقتين، أنجزها فوراً.\n\n## خطّط مساءً\nحدّد أهم ثلاث مهام للغد قبل النوم.\n\n## احمِ وقتك العميق\nخصّص ساعات للتركيز بلا مقاطعات.'},
+      {id:'p1',title:'كيف تبني عادة القراءة اليومية',tag:'تطوير ذاتي',date:Date.now(),cover:'',published:true,excerpt:'خطوات عملية مبنية على علم النفس السلوكي لتحويل القراءة إلى عادة راسخة تلازمك مدى الحياة.',body:'## البداية الصغيرة\nابدأ بصفحة واحدة يومياً. الهدف ليس الكمية بل الاستمرارية.\n\n## اربطها بعادة قائمة\nاقرأ بعد قهوة الصباح مباشرة؛ العادة القديمة تصبح تذكيراً للعادة الجديدة.\n\n> من قرأ صفحة كل يوم قرأ مكتبة في عمره.\n\n## تتبّع تقدّمك\nسجّل ما تقرأه، فالتقدّم المرئي يغذّي الحافز.'},
+      {id:'p2',title:'الذكاء الاصطناعي ومستقبل التعليم',tag:'تقنية',date:Date.now(),cover:'',published:true,excerpt:'كيف تُعيد نماذج الذكاء الاصطناعي تشكيل طريقة تعلّمنا، وما الفرص والمخاطر التي تحملها؟',body:'## تعليم مخصّص للجميع\nيتيح الذكاء الاصطناعي مساراً تعليمياً يناسب كل طالب على حدة.\n\n## دور المعلّم يتغيّر\nلا يختفي المعلّم، بل يتحوّل إلى موجّه وملهم.\n\n## تحديات يجب الانتباه لها\nالخصوصية والاعتماد المفرط والفجوة الرقمية قضايا تحتاج معالجة.'},
+      {id:'p3',title:'فن إدارة الوقت للمنشغلين',tag:'إنتاجية',date:Date.now(),cover:'',published:true,excerpt:'أنظمة بسيطة وفعّالة لإدارة وقتك دون الشعور بالإرهاق أو الذنب.',body:'## قاعدة الدقيقتين\nإن كانت المهمة تستغرق أقل من دقيقتين، أنجزها فوراً.\n\n## خطّط مساءً\nحدّد أهم ثلاث مهام للغد قبل النوم.\n\n## احمِ وقتك العميق\nخصّص ساعات للتركيز بلا مقاطعات.'},
     ]
   };
   let blogState = {...BLOG_EMPTY};
   let blogEditingId = null;
   let blogEditMeta  = null;
+  // controls where the builder lands when opened from the admin page:
+  // 'new' → jump to the Articles pane with a fresh post; a number → focus that post.
+  let blogBuilderFocus = null;
 
-  function newBlog(){ blogEditingId=null; blogEditMeta=null; blogState=JSON.parse(JSON.stringify(BLOG_SAMPLE)); showBlogBuilder(); window.scrollTo(0,0); }
-  async function startBlogEdit(id){
+  /* each account has exactly one blog. Starting a "new" blog when one already
+     exists just opens the admin page for the existing blog. */
+  async function newBlog(){
+    if(!currentUser){ showAuth('login'); return; }
+    try{
+      const s=await get(child(ref(db),'userBlogs/'+currentUser.uid));
+      if(s.exists() && Object.keys(s.val()).length){
+        toast('لديك مدونة واحدة بالفعل — يمكنك إدارتها وتعديلها');
+        showBlogAdmin(); return;
+      }
+    }catch(e){ console.error(e); }
+    blogEditingId=null; blogEditMeta=null; blogBuilderFocus=null;
+    blogState=JSON.parse(JSON.stringify(BLOG_SAMPLE)); showBlogBuilder(); window.scrollTo(0,0);
+  }
+  async function startBlogEdit(id, focus=null){
     if(!currentUser){ location.href=location.pathname+'?blogedit='+id; return; }
     document.body.style.background='';
     $('#app').innerHTML=`<div class="loader"><div><div class="spin"></div>جارٍ فتح المدونة للتعديل…</div></div>`;
     try{
       const s=await get(child(ref(db),'blogs/'+id));
-      if(!s.exists()){ toast('المدونة غير موجودة'); showMyBlogs(); return; }
+      if(!s.exists()){ toast('المدونة غير موجودة'); showBlogAdmin(); return; }
       const d=s.val();
       blogState={...BLOG_EMPTY};
       ['title','subtitle','author','authorEn','about','cover','logo','design'].forEach(k=>{ if(d[k]!=null) blogState[k]=d[k]; });
       blogState.posts = Array.isArray(d.posts)?d.posts.filter(Boolean).map(p=>({...p})):[];
       if(!BLOG_BY_ID[blogState.design]) blogState.design='bd1';
       blogEditingId=id;
-      blogEditMeta={ownerUid:d.ownerUid||currentUser.uid, ownerName:d.ownerName||currentUser.username, createdAt:d.createdAt||Date.now(),
-        viewSalt:d.viewSalt||null, viewPassHash:d.viewPassHash||null};
+      blogEditMeta={ownerUid:d.ownerUid||currentUser.uid, ownerName:d.ownerName||currentUser.username, createdAt:d.createdAt||Date.now()};
+      blogBuilderFocus=focus;
       showBlogBuilder(); window.scrollTo(0,0);
-    }catch(e){ console.error(e); toast('تعذّر الفتح'); showMyBlogs(); }
+    }catch(e){ console.error(e); toast('تعذّر الفتح'); showBlogAdmin(); }
   }
 
   /* ---------- blog builder ---------- */
   function showBlogBuilder(){
     if(!currentUser){ showAuth('login'); return; }
     const editing = blogEditingId!==null;
-    const protectedNow = editing && blogEditMeta && !!blogEditMeta.viewPassHash;
     document.title = editing ? 'تعديل المدونة' : 'أنشئ مدونتك';
     document.body.style.background='';
     const s=blogState;
+    const eyeSvg='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>';
     $('#app').innerHTML = appbar('build') + `
     <div class="wrap"><div class="builder">
       <section class="panel">
         <h2>${editing?'تعديل المدونة':'أنشئ مدونتك'}</h2>
         <div class="sub">${editing?'عدّل بيانات المدونة والمقالات ثم احفظ التغييرات.':'اختر تصميماً، أضف مقالاتك، ثم انشرها برابط دائم ومختصر.'}</div>
 
+        <div class="bpane pane-on" data-pane="data">
         <details class="acc" open>
           <summary><span class="sum-t">${UICON.person} بيانات المدونة</span></summary>
           <div class="acc-body">
@@ -3422,8 +3552,10 @@ const db = getDatabase(app);
             </div>
           </div>
         </details>
+        </div>
 
-        <details class="acc">
+        <div class="bpane" data-pane="design">
+        <details class="acc" open>
           <summary><span class="sum-t">${UICON.palette} تصميم المدونة <span style="color:var(--muted-2);font-weight:400">(${BLOG_DESIGNS.length})</span></span></summary>
           <div class="acc-body">
             <input id="bdSearch" class="lay-search" placeholder="ابحث عن تصميم…"/>
@@ -3433,7 +3565,9 @@ const db = getDatabase(app);
             </div>
           </div>
         </details>
+        </div>
 
+        <div class="bpane" data-pane="articles">
         <details class="acc" open>
           <summary><span class="sum-t">${UICON.chat} المقالات <span style="color:var(--muted-2);font-weight:400" id="postsCount">(${s.posts.length})</span></span></summary>
           <div class="acc-body">
@@ -3441,23 +3575,7 @@ const db = getDatabase(app);
             <button type="button" class="btn ghost" id="addPost" style="width:100%">${TAB.plus} إضافة مقالة</button>
           </div>
         </details>
-
-        <details class="acc">
-          <summary><span class="sum-t">${TAB.privacy} حماية الرابط بكلمة مرور</span></summary>
-          <div class="acc-body">
-            <div class="field">
-              <label>كلمة مرور الرابط (اختياري)</label>
-              <input id="f-b-viewPass" type="password" autocomplete="new-password" placeholder="${protectedNow?'محمي حالياً — اكتب كلمة مرور جديدة لتغييرها':'اتركه فارغاً لتكون المدونة عامة'}"/>
-              <div class="up-note ${protectedNow?'ok':''}">${protectedNow
-                ? '🔒 هذه المدونة محمية حالياً. من يفتح الرابط يجب أن يُدخل كلمة المرور.'
-                : 'عند تعيين كلمة مرور، لن تُفتح المدونة إلا بها — فلو تسرّب الرابط يبقى محتواك محمياً.'}</div>
-              ${protectedNow?`<label class="opt-row" style="margin-top:10px;cursor:pointer">
-                <div><div class="lbl">إزالة الحماية</div><div class="desc">اجعل المدونة عامة بدون كلمة مرور</div></div>
-                <span class="switch"><input type="checkbox" id="f-b-viewPassRemove"><span class="slider"></span></span>
-              </label>`:''}
-            </div>
-          </div>
-        </details>
+        </div>
 
         <button class="btn primary" id="bGen">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M10 13a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1"/><path d="M14 11a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1"/></svg>
@@ -3469,6 +3587,13 @@ const db = getDatabase(app);
         <div class="preview-head"><span class="t">معاينة المدونة</span><span class="live">مباشر</span></div>
         <div class="panel" style="padding:0;overflow:hidden"><div id="blogPrev" style="max-height:78vh;overflow:auto;border-radius:12px"></div></div>
       </section>
+
+      <nav class="build-nav">
+        <button class="bnav on" data-pane="data">${UICON.person}<span>البيانات</span></button>
+        <button class="bnav" data-pane="design">${UICON.palette}<span>التصميم</span></button>
+        <button class="bnav" data-pane="articles">${UICON.chat}<span>المقالات</span></button>
+        <button class="bnav" data-pane="preview">${eyeSvg}<span>المعاينة</span></button>
+      </nav>
     </div></div>
 
     <div class="overlay" id="bov">
@@ -3481,7 +3606,7 @@ const db = getDatabase(app);
         <div id="bShortNote" style="text-align:center;font-size:12px;color:var(--muted-2);margin:-8px 0 16px;min-height:16px"></div>
         <div class="modal-actions">
           <a class="btn primary" id="bOpenLink" target="_blank">فتح المدونة</a>
-          <button class="btn ghost" id="bToMine">مدوناتي</button>
+          <button class="btn ghost" id="bToMine">إدارة المدونة</button>
         </div>
       </div>
     </div>` + drawer('build');
@@ -3576,6 +3701,16 @@ const db = getDatabase(app);
             btn.addEventListener('click', ()=>{
               rte.focus();
               if(btn.hasAttribute('data-rteimg')){ item.querySelector('[data-rtefile]').click(); return; }
+              if(btn.hasAttribute('data-codeblock')){
+                const t=(window.getSelection&&window.getSelection().toString())||'';
+                document.execCommand('insertHTML',false,'<pre><code>'+esc(t||'// اكتب الكود هنا')+'</code></pre><p><br></p>');
+                sync(); return;
+              }
+              if(btn.hasAttribute('data-codeinline')){
+                const t=(window.getSelection&&window.getSelection().toString())||'';
+                document.execCommand('insertHTML',false,'<code>'+esc(t||'code')+'</code>&nbsp;');
+                sync(); return;
+              }
               const cmd=btn.dataset.cmd, val=btn.dataset.val;
               try{
                 if(cmd==='createLink'){ const u=prompt('أدخل الرابط (https://…)'); if(u) document.execCommand('createLink',false,/^https?:/i.test(u)?u:'https://'+u); }
@@ -3610,7 +3745,7 @@ const db = getDatabase(app);
       });
     }
     renderPosts();
-    $('#addPost').onclick=()=>{ blogState.posts.push({id:'p'+(blogState.posts.length+1)+'_'+shortId(4),title:'',tag:'',date:'',cover:'',excerpt:'',body:''}); renderPosts(); repaint(); };
+    $('#addPost').onclick=()=>{ blogState.posts.push({id:'p'+(blogState.posts.length+1)+'_'+shortId(4),title:'',tag:'',date:'',cover:'',excerpt:'',body:'',published:true}); renderPosts(); repaint(); if(window.__blogSetPane) window.__blogSetPane('articles'); const items=$('#postsList').querySelectorAll('.post-item'); const last=items[items.length-1]; if(last) last.scrollIntoView({behavior:'smooth',block:'center'}); };
 
     repaint();
 
@@ -3625,30 +3760,23 @@ const db = getDatabase(app);
         const ownerName = editing ? blogEditMeta.ownerName : currentUser.username;
         const createdAt = editing ? blogEditMeta.createdAt : Date.now();
         const id = blogEditingId || await uniqueBlogId();
-        let viewSalt     = editing && blogEditMeta ? (blogEditMeta.viewSalt||null)     : null;
-        let viewPassHash = editing && blogEditMeta ? (blogEditMeta.viewPassHash||null) : null;
-        const newPass   = ($('#f-b-viewPass')?.value||'').trim();
-        const removePass= $('#f-b-viewPassRemove')?.checked;
-        if(removePass){ viewSalt=null; viewPassHash=null; }
-        else if(newPass){ const vp=await buildViewPass(newPass); viewSalt=vp.viewSalt; viewPassHash=vp.viewPassHash; }
-        const cleanPosts = blogState.posts.filter(p=>p&&(p.title||p.body));
+        const cleanPosts = blogState.posts.filter(p=>p&&(p.title||p.body)).map(p=>({...p, published:p.published!==false}));
+        const pubCount = cleanPosts.filter(p=>p.published!==false).length;
         const updatedAt=Date.now();
-        const clean = {...blogState, posts:cleanPosts, ownerUid:owner, ownerName, createdAt, updatedAt, viewSalt, viewPassHash};
+        const clean = {...blogState, posts:cleanPosts, ownerUid:owner, ownerName, createdAt, updatedAt};
         await set(ref(db,'blogs/'+id), clean);
-        await set(ref(db,'userBlogs/'+owner+'/'+id), {title:blogState.title||'مدونة', design:blogState.design, updatedAt, locked:!!viewPassHash});
-        // public directory entry (safe fields only — never the password) powers the explorer
+        await set(ref(db,'userBlogs/'+owner+'/'+id), {title:blogState.title||'مدونة', design:blogState.design, updatedAt});
+        // public directory entry (safe fields only) powers the explorer — counts published posts only
         await set(ref(db,'blogIndex/'+id), {
           title:blogState.title||'مدونة', subtitle:blogState.subtitle||'', author:blogState.author||'',
-          cover:blogState.cover||'', design:blogState.design, count:cleanPosts.length, updatedAt, locked:!!viewPassHash
+          cover:blogState.cover||'', design:blogState.design, count:pubCount, updatedAt
         });
-        blogEditingId=id; blogEditMeta={ownerUid:owner, ownerName, createdAt, viewSalt, viewPassHash};
+        blogEditingId=id; blogEditMeta={ownerUid:owner, ownerName, createdAt};
 
         const base=location.href.split('#')[0].split('?')[0];
         const full=base+'?blog='+id;
         $('#bovTitle').textContent = editing?'تم حفظ التغييرات':'تم نشر المدونة';
-        $('#bovDesc').textContent = viewPassHash
-          ? '🔒 رابط محمي بكلمة مرور — لن يُفتح إلا بها، فشاركه مع كلمة المرور.'
-          : 'هذا هو رابط مدونتك الدائم — شاركه مع من تريد.';
+        $('#bovDesc').textContent = 'هذا هو رابط مدونتك الدائم — شاركه مع من تريد.';
         $('#bOutLink').value=full; $('#bOpenLink').href=full;
         $('#bov').classList.add('show');
         note.textContent='جارٍ اختصار الرابط…';
@@ -3661,8 +3789,63 @@ const db = getDatabase(app);
     };
     $('#bCopyLink').onclick=()=>{navigator.clipboard?.writeText($('#bOutLink').value);toast('تم نسخ الرابط ✓');};
     $('#bovClose').onclick=()=>$('#bov').classList.remove('show');
-    $('#bToMine').onclick=()=>{$('#bov').classList.remove('show'); showMyBlogs();};
+    $('#bToMine').onclick=()=>{$('#bov').classList.remove('show'); showBlogAdmin();};
     $('#bov').onclick=e=>{if(e.target===$('#bov'))$('#bov').classList.remove('show');};
+
+    // ---- app-like section navigation (mobile bottom bar + swipe) ----
+    (function(){
+      const nav=$('.build-nav'); if(!nav) return;
+      const panel=$('.builder>.panel');
+      const prev=$('.builder .preview-col');
+      const panes=[...document.querySelectorAll('.builder .bpane')];
+      const order=['data','design','articles','preview'];
+      let current='data';
+      const isMobile=()=>window.matchMedia('(max-width:600px)').matches;
+      const setPane=(name)=>{
+        if(!order.includes(name)) return;
+        current=name;
+        nav.querySelectorAll('.bnav').forEach(b=>b.classList.toggle('on',b.dataset.pane===name));
+        if(name==='preview'){
+          if(panel) panel.classList.add('pane-hide');
+          if(prev) prev.classList.add('pane-show');
+          repaint();
+        }else{
+          if(panel) panel.classList.remove('pane-hide');
+          if(prev) prev.classList.remove('pane-show');
+          panes.forEach(p=>p.classList.toggle('pane-on',p.dataset.pane===name));
+        }
+        if(isMobile()) window.scrollTo({top:0,behavior:'smooth'});
+      };
+      window.__blogSetPane=setPane;
+      nav.querySelectorAll('.bnav').forEach(b=>b.onclick=()=>setPane(b.dataset.pane));
+      // horizontal swipe between sections — but never hijack gestures that begin
+      // on a control that needs its own horizontal drag / scroll / tap
+      let sx=0,sy=0,tracking=false;
+      const root=$('.builder');
+      const NO_SWIPE='input,textarea,select,button,a,label,.bd-picker,.bd-swatch,.rte,.rte-editor,.rte-toolbar,.post-item';
+      root.addEventListener('touchstart',e=>{
+        tracking=false;
+        if(!isMobile()||e.touches.length>1) return;
+        if(e.target.closest(NO_SWIPE)) return;
+        sx=e.touches[0].clientX; sy=e.touches[0].clientY; tracking=true;
+      },{passive:true});
+      root.addEventListener('touchend',e=>{
+        if(!tracking) return; tracking=false;
+        const t=e.changedTouches[0], dx=t.clientX-sx, dy=t.clientY-sy;
+        if(Math.abs(dx)<70||Math.abs(dx)<Math.abs(dy)*1.8) return;
+        const i=order.indexOf(current);
+        const ni = dx>0 ? i-1 : i+1;   // RTL: swipe right → previous, swipe left → next
+        if(ni>=0&&ni<order.length) setPane(order[ni]);
+      },{passive:true});
+      // land on the pane requested by the admin page (add a fresh post / focus one)
+      if(blogBuilderFocus==='new'){ $('#addPost')?.click(); setPane('articles'); }
+      else if(typeof blogBuilderFocus==='number'){
+        setPane('articles');
+        const it=$('#postsList .post-item[data-pi="'+blogBuilderFocus+'"]');
+        if(it) it.scrollIntoView({behavior:'smooth',block:'center'});
+      }else setPane('data');
+      blogBuilderFocus=null;
+    })();
   }
   async function uniqueBlogId(){
     for(let k=0;k<6;k++){const id=shortId(7);const snap=await get(child(ref(db),'blogs/'+id));if(!snap.exists())return id;}
